@@ -4,23 +4,36 @@ import { useSelector, useDispatch } from 'react-redux'
 const useCounter = () => {
   const count = useSelector(state => state.count)
   const dispatch = useDispatch()
-  const increment = () =>
+  const increment = () => {
     dispatch({
       type: 'INCREMENT',
     })
-  const decrement = () =>
+  }
+  const decrement = () => {
     dispatch({
       type: 'DECREMENT',
     })
-  const reset = () =>
+  }
+  const reset = () => {
     dispatch({
       type: 'RESET',
     })
-  return { count, increment, decrement, reset }
+  }
+  const modal = () => {
+    dispatch({
+      type: 'MODAL',
+    })
+  }
+  const modal2 = () => {
+    dispatch({
+      type: 'MODAL2',
+    })
+  }
+  return { count, increment, decrement, reset, modal, modal2 }
 }
 
 const Counter = () => {
-  const { count, increment, decrement, reset } = useCounter()
+  const { count, increment, decrement, reset, modal, modal2 } = useCounter()
   return (
     <div>
       <h1>
@@ -29,6 +42,8 @@ const Counter = () => {
       <button onClick={increment}>+1</button>
       <button onClick={decrement}>-1</button>
       <button onClick={reset}>Reset</button>
+      <button onClick={modal}>Modal</button>
+      <button onClick={modal2}>Modal2</button>
     </div>
   )
 }
