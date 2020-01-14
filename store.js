@@ -13,46 +13,75 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'TICK':
-      return {
-        ...state,
-        lastUpdate: action.lastUpdate,
-        light: !!action.light,
-      }
+      return tickReduce(state, action)
     case 'INCREMENT':
-      return {
-        ...state,
-        count: state.count + 1,
-      }
+      return incrementReduce(state, action)
     case 'DECREMENT':
-      return {
-        ...state,
-        count: state.count - 1,
-      }
+      return decrementReduce(state, action)
     case 'RESET':
-      return {
-        ...state,
-        count: initialState.count,
-      }
+      return resetReduce(state, action)
     case 'MODAL':
-      state.isShowModal = !state.isShowModal
-      state.isFeature = false
-      return {
-        ...state,
-        isShowModal: state.isShowModal,
-        isFeature: state.isFeature
-      }
+      return modalReduce(state, action)
     case 'MODAL2':
-      state.isShowModal = !state.isShowModal
-      state.isFeature = true
-      return {
-        ...state,
-        isShowModal: state.isShowModal,
-        isFeature: state.isFeature
-      }
+      return modalReduce2(state, action)
     default:
       return state
   }
 }
+
+const tickReduce = (state, action) => {
+  return {
+    ...state,
+    lastUpdate: action.lastUpdate,
+    light: !!action.light,
+  }
+}
+
+const incrementReduce = (state, action) => {
+  return {
+    ...state,
+    count: state.count + 1,
+  }
+}
+
+const decrementReduce = (state, action) => {
+  return {
+    ...state,
+    count: state.count - 1,
+  }
+}
+
+const resetReduce = (state, action) => {
+  return {
+    ...state,
+    count: initialState.count,
+  }
+}
+
+const modalReduce = (state, action) => {
+  state.isShowModal = !state.isShowModal
+  state.isFeature = false
+  return {
+    ...state,
+    isShowModal: state.isShowModal,
+    isFeature: state.isFeature
+  }
+}
+
+const modalReduce2 = (state, action) => {
+  state.isShowModal = !state.isShowModal
+  state.isFeature = true
+  return {
+    ...state,
+    isShowModal: state.isShowModal,
+    isFeature: state.isFeature
+  }
+}
+
+export const doModal = (text) => ({
+  type: 'MODAL',
+  text
+})
 
 export const initializeStore = (preloadedState = initialState) => {
   return createStore(
