@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 const initialState = {
   lastUpdate: 0,
   light: false,
-  count: 0,
+  count: 0
 }
 
 const reducer = (state = initialState, action) => {
