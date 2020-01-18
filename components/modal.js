@@ -1,31 +1,31 @@
 import React from 'react'
-import Feature from './feature'
-import WeekResist from './weekresist'
+import Feature from './modal/feature'
+import WeekResist from './modal/weekresist'
 import { useSelector, useDispatch } from 'react-redux'
+import { hideModal } from '../actions'
 
 const useModal = () => {
   const isShowModal = useSelector((state) => state.isShowModal)
-  const isFeature = useSelector((state) => state.isFeature)
+  const switchModalContent = useSelector((state) => state.switchModalContent)
   const dispatch = useDispatch()
-  const modal = () => {
-    dispatch({
-      type: 'MODAL'
-    })
+
+  const close = () => {
+    dispatch(hideModal())
   }
 
-  return { isShowModal, modal, isFeature }
+  return { isShowModal, switchModalContent, close }
 }
 
 const Modal = () => {
-  const { isShowModal, isFeature, modal } = useModal()
+  const { isShowModal, switchModalContent, close } = useModal()
   let modalClass = 'modal'
   if (isShowModal === true) {
     modalClass = `${modalClass} is-open`
   }
-  const content = isFeature ? Feature() : WeekResist()
+  const content = switchModalContent === 'FEATURE' ? Feature() : WeekResist()
   return (
     <div className={modalClass}>
-      <div className="modal__overlay" onClick={modal} />
+      <div className="modal__overlay" onClick={close} />
       <div className="modal__content">
         {content}
       </div>
