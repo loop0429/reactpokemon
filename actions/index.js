@@ -12,7 +12,7 @@ export const showFeatureModal = (switchContent) => ({
   content: switchContent
 })
 
-export const showFeatureModal = (switchContent, no) => ({
+export const showWeekResistModal = (switchContent, no) => ({
   type: SHOW_WEEKREGIST_MODAL,
   payload: {
     content: switchContent,
