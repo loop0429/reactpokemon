@@ -1,5 +1,11 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import {
+  SHOW_FEATURE_MODAL, SHOW_WEEKREGIST_MODAL,
+  HIDE_MODAL, TOGGLE_SIDEBAR,
+  TOGGLE_FAVARITE, FILTERING_TYPES,
+  FILTERING_SERIES, FILTERING_CLEAR
+} from './actions'
 
 const initialState = {
   isOpenModal: false,
@@ -15,13 +21,13 @@ const initialState = {
 
 const modalReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SHOW_FEATURE_MODAL':
+    case SHOW_FEATURE_MODAL:
       return {
         ...state,
         isOpenModal: true,
         switchModalContent: action.content
       }
-    case 'SHOW_WEEKREGIST_MODAL':
+    case SHOW_WEEKREGIST_MODAL:
       const payload = {
         weekResist: state.weekResist.slice(),
         no: action.payload.no
@@ -35,7 +41,7 @@ const modalReducer = (state = initialState, action) => {
         selectedPokemon: payload.no,
         weekResist
       }
-    case 'HIDE_MODAL':
+    case HIDE_MODAL:
       return {
         ...state,
         isOpenModal: false
@@ -52,7 +58,7 @@ const calcWeekRegist = (data) => {
 
 const sidebarReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'TOGGLE_SIDEBAR':
+    case TOGGLE_SIDEBAR:
       return {
         ...state,
         isOpenSidebar: !state.isOpenSidebar
@@ -64,7 +70,7 @@ const sidebarReducer = (state = initialState, action) => {
 
 const favariteReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'TOGGLE_FAVARITE':
+    case TOGGLE_FAVARITE:
       let favorites = state.favoritesPokemon.slice()
       if (state.favoritesPokemon.includes(action.no)) {
         favorites = state.favoritesPokemon.filter((pokemon) => {
@@ -84,9 +90,9 @@ const favariteReducer = (state = initialState, action) => {
 
 const filteringReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'FILTERING_TYPES':
+    case FILTERING_TYPES:
       let types = state.selectedTypes.slice()
-      if (state.selectedTypes.includes(action.type)) {
+      if (state.selectedTypes.includes(action.pokeType)) {
         types = state.selectedTypes.filter((pokemon) => {
           return pokemon !== action.no
         })
@@ -101,7 +107,7 @@ const filteringReducer = (state = initialState, action) => {
         selectedSeries: '',
         filteredZukan
       }
-    case 'FILTERING_TYPES':
+    case FILTERING_SERIES:
       const selectedSeries = action.series
       const filteredZukan = filteringSeries(selectedSeries)
       return {
@@ -110,7 +116,7 @@ const filteringReducer = (state = initialState, action) => {
         selectedSeries,
         filteredZukan
       }
-    case 'FILTERING_CLEAR':
+    case FILTERING_CLEAR:
       return {
         ...state,
         selectedTypes: [],
