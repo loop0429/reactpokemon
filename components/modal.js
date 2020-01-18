@@ -5,21 +5,21 @@ import { useSelector, useDispatch } from 'react-redux'
 import { hideModal } from '../actions'
 
 const useModal = () => {
-  const isShowModal = useSelector((state) => state.isShowModal)
-  const switchModalContent = useSelector((state) => state.switchModalContent)
+  const isOpenModal = useSelector((state) => state.modalReducer.isOpenModal)
+  const switchModalContent = useSelector(state => state.modalReducer.switchModalContent)
   const dispatch = useDispatch()
 
   const close = () => {
     dispatch(hideModal())
   }
 
-  return { isShowModal, switchModalContent, close }
+  return { isOpenModal, switchModalContent, close }
 }
 
 const Modal = () => {
-  const { isShowModal, switchModalContent, close } = useModal()
+  const { isOpenModal, switchModalContent, close } = useModal()
   let modalClass = 'modal'
-  if (isShowModal === true) {
+  if (isOpenModal === true) {
     modalClass = `${modalClass} is-open`
   }
   const content = switchModalContent === 'FEATURE' ? Feature() : WeekResist()
