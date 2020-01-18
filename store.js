@@ -32,6 +32,8 @@ const modalReducer = (state = initialState, action) => {
         weekResist: state.weekResist.slice(),
         no: action.payload.no
       }
+
+      // TODO: ここエラー出そう
       const weekResist = calcWeekRegist(payload)
 
       return {
@@ -89,6 +91,7 @@ const favariteReducer = (state = initialState, action) => {
 }
 
 const filteringReducer = (state = initialState, action) => {
+  let filtered = []
   switch (action.type) {
     case FILTERING_TYPES:
       let types = state.selectedTypes.slice()
@@ -100,28 +103,28 @@ const filteringReducer = (state = initialState, action) => {
         types.push(action.type)
       }
 
-      const filteredZukan = filteringTypes(types)
+      filtered = filteringTypes(types)
       return {
         ...state,
         selectedTypes: types,
         selectedSeries: '',
-        filteredZukan
+        filteredZukan: filtered
       }
     case FILTERING_SERIES:
       const selectedSeries = action.series
-      const filteredZukan = filteringSeries(selectedSeries)
+      filtered = filteringSeries(selectedSeries)
       return {
         ...state,
         selectedTypes: [],
         selectedSeries,
-        filteredZukan
+        filteredZukan: filtered
       }
     case FILTERING_CLEAR:
       return {
         ...state,
         selectedTypes: [],
         selectedSeries: '',
-        filteredZukan: []
+        filteredZukan: filtered
       }
     default:
       return state
