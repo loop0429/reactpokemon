@@ -1,86 +1,142 @@
-import { createStore, applyMiddleware } from 'redux'
+import { combineReducers, createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 const initialState = {
-  lastUpdate: 0,
-  light: false,
-  count: 0,
-  isSidebarOpen: false,
-  isShowModal: false,
-  isFeature: false
+  isOpenModal: false,
+  switchModalContent: '',
+  isOpenSidebar: false,
+  selectedPokemon: 0,
+  favoritesPokemon: [],
+  weekResist: [],
+  filteredZukan: [],
+  selectedTypes: [],
+  selectedSeries: ''
 }
 
-const reducer = (state = initialState, action) => {
+const modalReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'TICK':
-      return tickReduce(state, action)
-    case 'INCREMENT':
-      return incrementReduce(state, action)
-    case 'DECREMENT':
-      return decrementReduce(state, action)
-    case 'RESET':
-      return resetReduce(state, action)
-    case 'MODAL':
-      return modalReduce(state, action)
-    case 'MODAL2':
-      return modalReduce2(state, action)
+    case 'SHOW_FEATURE_MODAL':
+      return {
+        ...state,
+        isOpenModal: true,
+        switchModalContent: action.content
+      }
+    case 'SHOW_WEEKREGIST_MODAL':
+      const payload = {
+        weekResist: state.weekResist.slice(),
+        no: action.payload.no
+      }
+      const weekResist = calcWeekRegist(payload)
+
+      return {
+        ...state,
+        isOpenModal: true,
+        switchModalContent: action.payload.content,
+        selectedPokemon: payload.no,
+        weekResist
+      }
+    case 'HIDE_MODAL':
+      return {
+        ...state,
+        isOpenModal: false
+      }
     default:
       return state
   }
 }
 
-const tickReduce = (state, action) => {
-  return {
-    ...state,
-    lastUpdate: action.lastUpdate,
-    light: !!action.light,
+const calcWeekRegist = (data) => {
+  console.log(data)
+  return []
+}
+
+const sidebarReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'TOGGLE_SIDEBAR':
+      return {
+        ...state,
+        isOpenSidebar: !state.isOpenSidebar
+      }
+    default:
+      return state
   }
 }
 
-const incrementReduce = (state, action) => {
-  return {
-    ...state,
-    count: state.count + 1,
+const favariteReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'TOGGLE_FAVARITE':
+      let favorites = state.favoritesPokemon.slice()
+      if (state.favoritesPokemon.includes(action.no)) {
+        favorites = state.favoritesPokemon.filter((pokemon) => {
+          return pokemon !== action.no
+        })
+      } else {
+        favorites.push(action.no)
+      }
+      return {
+        ...state,
+        favoritesPokemon: favorites
+      }
+    default:
+      return state
   }
 }
 
-const decrementReduce = (state, action) => {
-  return {
-    ...state,
-    count: state.count - 1,
+const filteringReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'FILTERING_TYPES':
+      let types = state.selectedTypes.slice()
+      if (state.selectedTypes.includes(action.type)) {
+        types = state.selectedTypes.filter((pokemon) => {
+          return pokemon !== action.no
+        })
+      } else {
+        types.push(action.type)
+      }
+
+      const filteredZukan = filteringTypes(types)
+      return {
+        ...state,
+        selectedTypes: types,
+        selectedSeries: '',
+        filteredZukan
+      }
+    case 'FILTERING_TYPES':
+      const selectedSeries = action.series
+      const filteredZukan = filteringSeries(selectedSeries)
+      return {
+        ...state,
+        selectedTypes: [],
+        selectedSeries,
+        filteredZukan
+      }
+    case 'FILTERING_CLEAR':
+      return {
+        ...state,
+        selectedTypes: [],
+        selectedSeries: '',
+        filteredZukan: []
+      }
+    default:
+      return state
   }
 }
 
-const resetReduce = (state, action) => {
-  return {
-    ...state,
-    count: initialState.count,
-  }
+const filteringTypes = (data) => {
+  console.log(data)
+  return []
 }
 
-const modalReduce = (state, action) => {
-  state.isShowModal = !state.isShowModal
-  state.isFeature = false
-  return {
-    ...state,
-    isShowModal: state.isShowModal,
-    isFeature: state.isFeature
-  }
+const filteringSeries = (data) => {
+  console.log(data)
+  return []
 }
 
-const modalReduce2 = (state, action) => {
-  state.isShowModal = !state.isShowModal
-  state.isFeature = true
-  return {
-    ...state,
-    isShowModal: state.isShowModal,
-    isFeature: state.isFeature
-  }
-}
-
-export const doModal = (text) => ({
-  type: 'MODAL',
-  text
+const reducer = combineReducers({
+  modalReducer,
+  sidebarReducer,
+  favariteReducer,
+  filteringReducer
 })
 
 export const initializeStore = (preloadedState = initialState) => {
