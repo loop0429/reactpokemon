@@ -1,5 +1,6 @@
 import React from 'react'
 import { withRedux } from '../lib/redux'
+import Header from '../components/header'
 import Sidebar from '../components/sidebar'
 import Modal from '../components/modal'
 import { showFeatureModal } from '../actions'
@@ -19,6 +20,7 @@ const IndexPage = () => {
   const { open } = useModal()
   return (
     <>
+      <Header />
       <button type="button" onClick={open}>hoge</button>
       <Modal />
     </>
