@@ -8,6 +8,7 @@ const IndexPage = () => {
   return (
     <>
       <Header />
+      <Sidebar />
       <Modal />
     </>
   )
