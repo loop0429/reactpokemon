@@ -46,7 +46,7 @@ const Sidebar = () => {
           width: 100%;
           height: 100vh;
           background: rgba(0, 0, 0, 0);
-          transition: all .5s;
+          transition: all 0.5s ease-in-out;
           z-index: 49;
         }
         .sidebar.is-open .sidebar__wrapper {
