@@ -7,15 +7,15 @@ export const FILTERING_TYPES = 'FILTERING_TYPES'
 export const FILTERING_SERIES = 'FILTERING_SERIES'
 export const FILTERING_CLEAR = 'FILTERING_CLEAR'
 
-export const showFeatureModal = (switchContent) => ({
+export const showFeatureModal = () => ({
   type: SHOW_FEATURE_MODAL,
-  content: switchContent
+  content: 'FEATURE'
 })
 
-export const showWeekResistModal = (switchContent, no) => ({
+export const showWeekResistModal = (no) => ({
   type: SHOW_WEEKREGIST_MODAL,
   payload: {
-    content: switchContent,
+    content: 'WEEK_RESIST',
     no
   }
 })
