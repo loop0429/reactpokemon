@@ -9,15 +9,15 @@ const useModal = () => {
   const switchModalContent = useSelector(state => state.modalReducer.switchModalContent)
   const dispatch = useDispatch()
 
-  const close = () => {
+  const handleOverlayClick = () => {
     dispatch(hideModal())
   }
 
-  return { isOpenModal, switchModalContent, close }
+  return { isOpenModal, switchModalContent, handleOverlayClick }
 }
 
 const Modal = () => {
-  const { isOpenModal, switchModalContent, close } = useModal()
+  const { isOpenModal, switchModalContent, handleOverlayClick } = useModal()
   let modalClass = 'modal'
   if (isOpenModal === true) {
     modalClass = `${modalClass} is-open`
@@ -25,7 +25,7 @@ const Modal = () => {
   const content = switchModalContent === 'FEATURE' ? Feature() : WeekResist()
   return (
     <div className={modalClass}>
-      <div className="modal__overlay" onClick={close} />
+      <div className="modal__overlay" onClick={handleOverlayClick} />
       <div className="modal__content">
         {content}
       </div>
