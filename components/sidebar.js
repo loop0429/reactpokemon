@@ -26,6 +26,21 @@ const Sidebar = () => {
   const [collapseTypes, setCollapseTypes] = useState(false)
   const [collapseSeries, setCollapseSeries] = useState(false)
 
+  const toggleCollapse = (e) => {
+    switch (e) {
+      case 'TYPES':
+        setCollapseTypes(!collapseTypes)
+        setCollapseSeries(false)
+        break
+      case 'SERIES':
+        setCollapseSeries(!collapseSeries)
+        setCollapseTypes(false)
+        break
+      default:
+        break
+    }
+  }
+
   return (
     <div className={sidebarClass}>
       <div className="sidebar__overlay" onClick={handleOverlayClick} />
@@ -36,7 +51,15 @@ const Sidebar = () => {
             <button className="block w-full p-2 bg-blue-600 text-white text-left btn-filter" type="button">お気に入りポケモンで絞り込み</button>
           </dd>
           <dd className="text-sm">
-            <button className="block w-full p-2 bg-blue-600 text-white text-left btn-filter" type="button" onClick={() => {setCollapseTypes(!collapseTypes)}}>タイプで絞り込み</button>
+            <button
+              className="block w-full p-2 bg-blue-600 text-white text-left btn-filter"
+              type="button"
+              onClick={() => {
+                toggleCollapse('TYPES')
+              }}
+            >
+              タイプで絞り込み
+            </button>
             <Collapse isOpened={collapseTypes} initialStyle={{height: '0px', overflow: 'hidden'}}>
               <ul className="filter-child__list">
                 {TYPES.map((item) => {
@@ -58,7 +81,15 @@ const Sidebar = () => {
             </Collapse>
           </dd>
           <dd className="text-sm">
-            <button className="block w-full p-2 bg-blue-600 text-white text-left btn-filter" type="button" onClick={() => {setCollapseSeries(!collapseSeries)}}>シリーズで絞り込み</button>
+            <button
+              className="block w-full p-2 bg-blue-600 text-white text-left btn-filter"
+              type="button"
+              onClick={() => {
+                toggleCollapse('SERIES')
+              }}
+            >
+              シリーズで絞り込み
+            </button>
             <Collapse isOpened={collapseSeries} initialStyle={{height: '0px', overflow: 'hidden'}}>
               <ul className="filter-child__list">
                 {SERIES.map((item) => {
