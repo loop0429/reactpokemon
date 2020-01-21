@@ -15,6 +15,7 @@ import '../css/sprite11.css'
 import '../css/sprite12.css'
 import '../css/sprite13.css'
 import '../css/sprite14.css'
+import '../css/collapse.css'
 
 class MyApp extends App {
   render() {

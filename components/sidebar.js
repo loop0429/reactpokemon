@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Collapse } from 'react-collapse'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleSidebar } from '../actions'
 import { TYPES, SERIES } from '../constans'
@@ -22,6 +23,9 @@ const Sidebar = () => {
     sidebarClass = `${sidebarClass} is-open`
   }
 
+  const [collapseTypes, setCollapseTypes] = useState(false)
+  const [collapseSeries, setCollapseSeries] = useState(false)
+
   return (
     <div className={sidebarClass}>
       <div className="sidebar__overlay" onClick={handleOverlayClick} />
@@ -32,43 +36,47 @@ const Sidebar = () => {
             <button className="block w-full p-2 bg-blue-600 text-white text-left btn-filter" type="button">お気に入りポケモンで絞り込み</button>
           </dd>
           <dd className="text-sm">
-            <button className="block w-full p-2 bg-blue-600 text-white text-left btn-filter" type="button">タイプで絞り込み</button>
-            <ul className="filter-child__list">
-              {TYPES.map((item) => {
-                return (
-                  <li key={item.en} className="filter-child__item">
-                    <button className="relative w-full filter-child__btn" type="button">
-                      <div className="relative flex items-center p-2 z-10">
-                        <img className="mr-1" src={`/static/img/icon/type-${item.en}.png`} width="15" />
-                        {item.ja}
-                      </div>
-                    </button>
-                  </li>
-                )
-              })}
-              <li>
-                <button className="w-full p-2 bg-gray-200 text-left btn-clear-filter" type="button">選択をクリア</button>
-              </li>
-            </ul>
+            <button className="block w-full p-2 bg-blue-600 text-white text-left btn-filter" type="button" onClick={() => {setCollapseTypes(!collapseTypes)}}>タイプで絞り込み</button>
+            <Collapse isOpened={collapseTypes} initialStyle={{height: '0px', overflow: 'hidden'}}>
+              <ul className="filter-child__list">
+                {TYPES.map((item) => {
+                  return (
+                    <li key={item.en} className="filter-child__item">
+                      <button className="relative w-full filter-child__btn" type="button">
+                        <div className="relative flex items-center p-2 z-10">
+                          <img className="mr-1" src={`/static/img/icon/type-${item.en}.png`} width="15" />
+                          {item.ja}
+                        </div>
+                      </button>
+                    </li>
+                  )
+                })}
+                <li>
+                  <button className="w-full p-2 bg-gray-200 text-left btn-clear-filter" type="button">選択をクリア</button>
+                </li>
+              </ul>
+            </Collapse>
           </dd>
           <dd className="text-sm">
-            <button className="block w-full p-2 bg-blue-600 text-white text-left btn-filter" type="button">シリーズで絞り込み</button>
-            <ul className="filter-child__list">
-              {SERIES.map((item) => {
-                return (
-                  <li key={item.numbers} className="filter-child__item">
-                    <button className="relative w-full filter-child__btn" type="button">
-                      <div className="relative flex items-center p-2 z-10">
-                        {item.area}
-                      </div>
-                    </button>
-                  </li>
-                )
-              })}
-              <li>
-                <button className="w-full p-2 bg-gray-200 text-left btn-clear-filter" type="button">選択をクリア</button>
-              </li>
-            </ul>
+            <button className="block w-full p-2 bg-blue-600 text-white text-left btn-filter" type="button" onClick={() => {setCollapseSeries(!collapseSeries)}}>シリーズで絞り込み</button>
+            <Collapse isOpened={collapseSeries} initialStyle={{height: '0px', overflow: 'hidden'}}>
+              <ul className="filter-child__list">
+                {SERIES.map((item) => {
+                  return (
+                    <li key={item.numbers} className="filter-child__item">
+                      <button className="relative w-full filter-child__btn" type="button">
+                        <div className="relative flex items-center p-2 z-10">
+                          {item.area}
+                        </div>
+                      </button>
+                    </li>
+                  )
+                })}
+                <li>
+                  <button className="w-full p-2 bg-gray-200 text-left btn-clear-filter" type="button">選択をクリア</button>
+                </li>
+              </ul>
+            </Collapse>
           </dd>
         </dl>
       </div>
@@ -120,13 +128,13 @@ const Sidebar = () => {
         }
         .btn-filter {
           margin-bottom: 1px;
-          transition: opacity 0.2s ease-in-out
+          transition: opacity 0.2s ease-in-out;
         }
         .btn-filter:hover {
           opacity: 0.7;
         }
         .btn-clear-filter {
-          transition: opacity 0.2s ease-in-out
+          transition: opacity 0.2s ease-in-out;
         }
         .btn-clear-filter:hover {
           opacity: 0.7;
