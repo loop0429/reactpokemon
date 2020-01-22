@@ -23,22 +23,19 @@ const Sidebar = () => {
     sidebarClass = `${sidebarClass} is-open`
   }
 
-  const [collapseTypes, setCollapseTypes] = useState(false)
-  const [collapseSeries, setCollapseSeries] = useState(false)
+  const isCollapseOpened = {
+    types: false,
+    series: false
+  }
+
+  const [isOpened, setCollapseOpened] = useState(isCollapseOpened)
 
   const toggleCollapse = (e) => {
-    switch (e) {
-      case 'TYPES':
-        setCollapseTypes(!collapseTypes)
-        setCollapseSeries(false)
-        break
-      case 'SERIES':
-        setCollapseSeries(!collapseSeries)
-        setCollapseTypes(false)
-        break
-      default:
-        break
-    }
+    const payload = {}
+    Object.keys(isOpened).forEach((key) => {
+      payload[key] = (e === key) ? !isOpened[e] : false
+    })
+    setCollapseOpened(payload)
   }
 
   return (
@@ -55,12 +52,12 @@ const Sidebar = () => {
               className="block w-full p-2 bg-blue-600 text-white text-left btn-filter"
               type="button"
               onClick={() => {
-                toggleCollapse('TYPES')
+                toggleCollapse('types')
               }}
             >
               タイプで絞り込み
             </button>
-            <Collapse isOpened={collapseTypes} initialStyle={{height: '0px', overflow: 'hidden'}}>
+            <Collapse isOpened={isOpened.types} initialStyle={{height: '0px', overflow: 'hidden'}}>
               <ul className="filter-child__list">
                 {TYPES.map((item) => {
                   return (
@@ -85,12 +82,12 @@ const Sidebar = () => {
               className="block w-full p-2 bg-blue-600 text-white text-left btn-filter"
               type="button"
               onClick={() => {
-                toggleCollapse('SERIES')
+                toggleCollapse('series')
               }}
             >
               シリーズで絞り込み
             </button>
-            <Collapse isOpened={collapseSeries} initialStyle={{height: '0px', overflow: 'hidden'}}>
+            <Collapse isOpened={isOpened.series} initialStyle={{height: '0px', overflow: 'hidden'}}>
               <ul className="filter-child__list">
                 {SERIES.map((item) => {
                   return (
