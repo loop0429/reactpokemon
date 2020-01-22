@@ -6,7 +6,7 @@ import { hideModal } from '../actions'
 
 const useModal = () => {
   const isOpenModal = useSelector((state) => state.modalReducer.isOpenModal)
-  const switchModalContent = useSelector(state => state.modalReducer.switchModalContent)
+  const switchModalContent = useSelector((state) => state.modalReducer.switchModalContent)
 
   const dispatch = useDispatch()
   const handleOverlayClick = () => {
