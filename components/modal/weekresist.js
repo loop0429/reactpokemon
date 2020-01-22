@@ -1,21 +1,33 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+
+const useWeekResist = () => {
+  const weekResist = useSelector((state) => state.modalReducer.weekResist)
+
+  return { weekResist }
+}
 
 const WeekResist = () => {
+  const { weekResist } = useWeekResist()
   return (
     <>
       <table className="border-collapse text-sm">
         <tbody>
-          <tr>
-            <th>二重弱点</th>
-            <td>
-              <ul className="flex flex-wrap">
-                <li className="flex items-center mr-1">
-                  <img className="mr-1" src="/static/img/icon/type-Bug.png" width="15" />
-                  <span>虫</span>
-                </li>
-              </ul>
-            </td>
-          </tr>
+          {Object.keys(weekResist).map((item, index) => {
+            return (
+              <tr key={index}>
+                <th>{item.name}</th>
+                <td>
+                  <ul className="flex flex-wrap">
+                    <li className="flex items-center mr-1">
+                      <img className="mr-1" src={item.img} width="15" />
+                      <span>{item.type}</span>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            )
+          })}
         </tbody>
       </table>
       <style jsx>{`

@@ -29,11 +29,12 @@ const modalReducer = (state = initialState, action) => {
         switchModalContent: action.content
       }
     case SHOW_WEEKREGIST_MODAL:
+      const weekResist = calcWeekRegist(action.payload.index)
       return {
         ...state,
         isOpenModal: true,
         switchModalContent: action.payload.content,
-        weekResist: calcWeekRegist(action.payload.index)
+        weekResist
       }
     case HIDE_MODAL:
       return {
@@ -76,11 +77,26 @@ const calcWeekRegist = (index) => {
   })
 
   const payload = {
-    week2: [],
-    week1: [],
-    resist1: [],
-    resist2: [],
-    resist3: []
+    week2: {
+      name: '二重弱点',
+      types: []
+    },
+    week1: {
+      name: '弱点',
+      types: []
+    },
+    resist1: {
+      name: '耐性',
+      types: []
+    },
+    resist2: {
+      name: '二重耐性',
+      types: []
+    },
+    resist3: {
+      name: '三重耐性',
+      types: []
+    }
   }
 
   Object.keys(wsData).forEach((type) => {
@@ -92,23 +108,23 @@ const calcWeekRegist = (index) => {
     switch (wsData[type]) {
       // 二重弱点
       case 2:
-        payload.week2.push(data)
+        payload.week2.types.push(data)
         break
       // 弱点
       case 1:
-        payload.week1.push(data)
+        payload.week1.types.push(data)
         break
       // 耐性
       case -1:
-        payload.resist1.push(data)
+        payload.resist1.types.push(data)
         break
       // 二重耐性
       case -2:
-        payload.resist2.push(data)
+        payload.resist2.types.push(data)
         break
       // 三重耐性
       case -3:
-        payload.resist3.push(data)
+        payload.resist3.types.push(data)
         break
     }
   })
