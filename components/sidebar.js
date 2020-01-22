@@ -40,7 +40,7 @@ const Sidebar = () => {
 
   return (
     <div className={sidebarClass}>
-      <div className="sidebar__overlay" onClick={handleOverlayClick} />
+      <div className="sidebar__overlay" onClick={() => {handleOverlayClick()}} />
       <div className="sidebar__wrapper">
         <dl className="m-0">
           <dt className="p-2 bg-gray-200">絞り込み検索</dt>
@@ -51,9 +51,7 @@ const Sidebar = () => {
             <button
               className="block w-full p-2 bg-blue-600 text-white text-left btn-filter"
               type="button"
-              onClick={() => {
-                toggleCollapse('types')
-              }}
+              onClick={() => {toggleCollapse('types')}}
             >
               タイプで絞り込み
             </button>
@@ -81,9 +79,7 @@ const Sidebar = () => {
             <button
               className="block w-full p-2 bg-blue-600 text-white text-left btn-filter"
               type="button"
-              onClick={() => {
-                toggleCollapse('series')
-              }}
+              onClick={() => {toggleCollapse('series')}}
             >
               シリーズで絞り込み
             </button>

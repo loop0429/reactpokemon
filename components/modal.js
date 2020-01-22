@@ -28,7 +28,7 @@ const Modal = () => {
 
   return (
     <div className={modalClass}>
-      <div className="modal__overlay" onClick={handleOverlayClick} />
+      <div className="modal__overlay" onClick={() => {handleOverlayClick()}} />
       <div className="modal__content">
         {content}
       </div>
