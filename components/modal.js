@@ -1,6 +1,6 @@
 import React from 'react'
 import Feature from './modal/feature'
-import WeekResist from './modal/weekresist'
+import WeakResist from './modal/weakresist'
 import { useSelector, useDispatch } from 'react-redux'
 import { hideModal } from '../actions'
 
@@ -24,7 +24,7 @@ const Modal = () => {
     modalClass = `${modalClass} is-open`
   }
 
-  const content = switchModalContent === 'FEATURE' ? Feature() : WeekResist()
+  const content = switchModalContent === 'FEATURE' ? Feature() : WeakResist()
 
   return (
     <div className={modalClass}>

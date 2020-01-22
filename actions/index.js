@@ -1,5 +1,5 @@
 export const SHOW_FEATURE_MODAL = 'SHOW_FEATURE_MODAL'
-export const SHOW_WEEKREGIST_MODAL = 'SHOW_WEEKREGIST_MODAL'
+export const SHOW_WEAKREGIST_MODAL = 'SHOW_WEAKREGIST_MODAL'
 export const HIDE_MODAL = 'HIDE_MODAL'
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR'
 export const TOGGLE_FAVARITE = 'TOGGLE_FAVARITE'
@@ -12,10 +12,10 @@ export const showFeatureModal = () => ({
   content: 'FEATURE'
 })
 
-export const showWeekResistModal = (index) => ({
-  type: SHOW_WEEKREGIST_MODAL,
+export const showWeakResistModal = (index) => ({
+  type: SHOW_WEAKREGIST_MODAL,
   payload: {
-    content: 'WEEK_RESIST',
+    content: 'WEAK_RESIST',
     index
   }
 })

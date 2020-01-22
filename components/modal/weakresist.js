@@ -1,19 +1,19 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-const useWeekResist = () => {
-  const weekResist = useSelector((state) => state.modalReducer.weekResist)
+const useWeakResist = () => {
+  const weakResist = useSelector((state) => state.modalReducer.weakResist)
 
-  return { weekResist }
+  return { weakResist }
 }
 
-const WeekResist = () => {
-  const { weekResist } = useWeekResist()
+const WeakResist = () => {
+  const { weakResist } = useWeakResist()
   return (
     <>
       <table className="border-collapse text-sm">
         <tbody>
-          {Object.keys(weekResist).map((item, index) => {
+          {Object.keys(weakResist).map((item, index) => {
             return (
               <tr key={index}>
                 <th>{item.name}</th>
@@ -49,4 +49,4 @@ const WeekResist = () => {
   )
 }
 
-export default WeekResist
+export default WeakResist

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { showWeekResistModal, toggleFavarite } from '../actions'
+import { showWeakResistModal, toggleFavarite } from '../actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
@@ -10,7 +10,7 @@ const useZukan = () => {
   const dispatch = useDispatch()
 
   const handlePokemonClick = (index) => {
-    dispatch(showWeekResistModal(index))
+    dispatch(showWeakResistModal(index))
   }
 
   return { handlePokemonClick }

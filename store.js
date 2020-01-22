@@ -1,20 +1,20 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import {
-  SHOW_FEATURE_MODAL, SHOW_WEEKREGIST_MODAL,
+  SHOW_FEATURE_MODAL, SHOW_WEAKREGIST_MODAL,
   HIDE_MODAL, TOGGLE_SIDEBAR,
   TOGGLE_FAVARITE, FILTERING_TYPES,
   FILTERING_SERIES, FILTERING_CLEAR
 } from './actions'
 import pokedex from './pokedex.json'
-import weekResistDex from './weak_resist.json'
+import weakResistDex from './weak_resist.json'
 
 const initialState = {
   isOpenModal: false,
   switchModalContent: '',
   isOpenSidebar: false,
   favoritesPokemon: [],
-  weekResist: {},
+  weakResist: {},
   filteredZukan: [],
   selectedTypes: [],
   selectedSeries: ''
@@ -28,13 +28,13 @@ const modalReducer = (state = initialState, action) => {
         isOpenModal: true,
         switchModalContent: action.content
       }
-    case SHOW_WEEKREGIST_MODAL:
-      const weekResist = calcWeekRegist(action.payload.index)
+    case SHOW_WEAKREGIST_MODAL:
+      const weakResist = calcWeakRegist(action.payload.index)
       return {
         ...state,
         isOpenModal: true,
         switchModalContent: action.payload.content,
-        weekResist
+        weakResist
       }
     case HIDE_MODAL:
       return {
@@ -46,21 +46,21 @@ const modalReducer = (state = initialState, action) => {
   }
 }
 
-const calcWeekRegist = (index) => {
+const calcWeakRegist = (index) => {
   const pokemonData = pokedex[index]
   const types = pokemonData.type
   const wsData = {}
 
   // タイプの数だけ回す
   types.forEach((type) => {
-    const typeData = weekResistDex[type]
+    const typeData = weakResistDex[type]
 
     // すでにwsDataに登録されていたら、すでに登録されているものを±して計算
 
     // 弱点
-    const weeks = typeData.week
-    weeks.forEach((week) => {
-      wsData[week] = (wsData[week]) ? wsData[week] + 1 : 1
+    const weaks = typeData.weak
+    weaks.forEach((weak) => {
+      wsData[weak] = (wsData[weak]) ? wsData[weak] + 1 : 1
     })
 
     // 耐性
@@ -77,11 +77,11 @@ const calcWeekRegist = (index) => {
   })
 
   const payload = {
-    week2: {
+    weak2: {
       name: '二重弱点',
       types: []
     },
-    week1: {
+    weak1: {
       name: '弱点',
       types: []
     },
@@ -101,18 +101,18 @@ const calcWeekRegist = (index) => {
 
   Object.keys(wsData).forEach((type) => {
     const data = {
-      type: weekResistDex[type].ja,
+      type: weakResistDex[type].ja,
       img: `/static/img/icon/type-${type}.png`
     }
 
     switch (wsData[type]) {
       // 二重弱点
       case 2:
-        payload.week2.types.push(data)
+        payload.weak2.types.push(data)
         break
       // 弱点
       case 1:
-        payload.week1.types.push(data)
+        payload.weak1.types.push(data)
         break
       // 耐性
       case -1:

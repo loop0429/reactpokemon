@@ -1,6 +1,6 @@
 {
     "Normal": {
-        "week": [
+        "weak": [
             "Fighting"
         ],
         "resistance": [
@@ -11,7 +11,7 @@
         "ja": "ノーマル"
     },
     "Fighting": {
-        "week": [
+        "weak": [
             "Flying", "Psychic", "Fairy"
         ],
         "resistance": [
@@ -22,7 +22,7 @@
         "ja": "かくとう"
     },
     "Flying": {
-        "week": [
+        "weak": [
             "Rock", "Electric", "Ice"
         ],
         "resistance": [
@@ -34,7 +34,7 @@
         "ja": "ひこう"
     },
     "Poison": {
-        "week": [
+        "weak": [
             "Ground", "Psychic"
         ],
         "resistance": [
@@ -45,7 +45,7 @@
         "ja": "どく"
     },
     "Ground": {
-        "week": [
+        "weak": [
             "Water", "Grass", "Ice"
         ],
         "resistance": [
@@ -57,7 +57,7 @@
         "ja": "じめん"
     },
     "Rock": {
-        "week": [
+        "weak": [
             "Fighting", "Ground", "Steel", "Water", "Grass"
         ],
         "resistance": [
@@ -68,7 +68,7 @@
         "ja": "いわ"
     },
     "Bug": {
-        "week": [
+        "weak": [
             "Flying", "Rock", "Fire"
         ],
         "resistance": [
@@ -79,7 +79,7 @@
         "ja": "むし"
     },
     "Ghost": {
-        "week": [
+        "weak": [
             "Ghost", "Dark"
         ],
         "resistance": [
@@ -91,7 +91,7 @@
         "ja": "ゴースト"
     },
     "Steel": {
-        "week": [
+        "weak": [
             "Fighting", "Ground", "Fire"
         ],
         "resistance": [
@@ -103,7 +103,7 @@
         "ja": "はがね"
     },
     "Fire": {
-        "week": [
+        "weak": [
             "Ground", "Rock", "Water"
         ],
         "resistance": [
@@ -114,7 +114,7 @@
         "ja": "ほのお"
     },
     "Water": {
-        "week": [
+        "weak": [
             "Electric", "Grass"
         ],
         "resistance": [
@@ -125,7 +125,7 @@
         "ja": "みず"
     },
     "Grass": {
-        "week": [
+        "weak": [
             "Poison", "Flying", "Bug", "Fire", "Ice"
         ],
         "resistance": [
@@ -136,7 +136,7 @@
         "ja": "くさ"
     },
     "Electric": {
-        "week": [
+        "weak": [
             "Ground"
         ],
         "resistance": [
@@ -147,7 +147,7 @@
         "ja": "でんき"
     },
     "Psychic": {
-        "week": [
+        "weak": [
             "Bug", "Ghost", "Dark"
         ],
         "resistance": [
@@ -158,7 +158,7 @@
         "ja": "エスパー"
     },
     "Ice": {
-        "week": [
+        "weak": [
             "Fighting", "Rock", "Steel", "Fire"
         ],
         "resistance": [
@@ -169,7 +169,7 @@
         "ja": "こおり"
     },
     "Dragon": {
-        "week": [
+        "weak": [
             "Ice", "Dragon", "Fairy"
         ],
         "resistance": [
@@ -180,7 +180,7 @@
         "ja": "ドラゴン"
     },
     "Dark": {
-        "week": [
+        "weak": [
             "Fighting", "Bug", "Fairy"
         ],
         "resistance": [
@@ -192,7 +192,7 @@
         "ja": "あく"
     },
     "Fairy": {
-        "week": [
+        "weak": [
             "Poison", "Steel"
         ],
         "resistance": [
