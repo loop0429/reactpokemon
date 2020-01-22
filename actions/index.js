@@ -12,11 +12,11 @@ export const showFeatureModal = () => ({
   content: 'FEATURE'
 })
 
-export const showWeekResistModal = (no) => ({
+export const showWeekResistModal = (index) => ({
   type: SHOW_WEEKREGIST_MODAL,
   payload: {
     content: 'WEEK_RESIST',
-    no
+    index
   }
 })
 

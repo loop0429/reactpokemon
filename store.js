@@ -6,14 +6,15 @@ import {
   TOGGLE_FAVARITE, FILTERING_TYPES,
   FILTERING_SERIES, FILTERING_CLEAR
 } from './actions'
+import pokedex from './pokedex.json'
+import weekResistDex from './weak_resist.json'
 
 const initialState = {
   isOpenModal: false,
   switchModalContent: '',
   isOpenSidebar: false,
-  selectedPokemon: 0,
   favoritesPokemon: [],
-  weekResist: [],
+  weekResist: {},
   filteredZukan: [],
   selectedTypes: [],
   selectedSeries: ''
@@ -28,20 +29,11 @@ const modalReducer = (state = initialState, action) => {
         switchModalContent: action.content
       }
     case SHOW_WEEKREGIST_MODAL:
-      const payload = {
-        weekResist: state.weekResist.slice(),
-        no: action.payload.no
-      }
-
-      // TODO: ここエラー出そう
-      const weekResist = calcWeekRegist(payload)
-
       return {
         ...state,
         isOpenModal: true,
         switchModalContent: action.payload.content,
-        selectedPokemon: payload.no,
-        weekResist
+        weekResist: calcWeekRegist(action.payload.index)
       }
     case HIDE_MODAL:
       return {
@@ -53,9 +45,75 @@ const modalReducer = (state = initialState, action) => {
   }
 }
 
-const calcWeekRegist = (data) => {
-  console.log(data)
-  return []
+const calcWeekRegist = (index) => {
+  const pokemonData = pokedex[index]
+  const types = pokemonData.type
+  const wsData = {}
+
+  // タイプの数だけ回す
+  types.forEach((type) => {
+    const typeData = weekResistDex[type]
+
+    // すでにwsDataに登録されていたら、すでに登録されているものを±して計算
+
+    // 弱点
+    const weeks = typeData.week
+    weeks.forEach((week) => {
+      wsData[week] = (wsData[week]) ? wsData[week] + 1 : 1
+    })
+
+    // 耐性
+    const resists = typeData.resistance
+    resists.forEach((resist) => {
+      wsData[resist] = (wsData[resist]) ? wsData[resist] - 1 : -1
+    })
+
+    // 無効※ポケGoでは二重耐性
+    const noEffects = typeData.no_effect
+    noEffects.forEach((noEffect) => {
+      wsData[noEffect] = (wsData[noEffect]) ? wsData[noEffect] - 1 : -1
+    })
+  })
+
+  const payload = {
+    week2: [],
+    week1: [],
+    resist1: [],
+    resist2: [],
+    resist3: []
+  }
+
+  Object.keys(wsData).forEach((type) => {
+    const data = {
+      type: weekResistDex[type].ja,
+      img: `/static/img/icon/type-${type}.png`
+    }
+
+    switch (wsData[type]) {
+      // 二重弱点
+      case 2:
+        payload.week2.push(data)
+        break
+      // 弱点
+      case 1:
+        payload.week1.push(data)
+        break
+      // 耐性
+      case -1:
+        payload.resist1.push(data)
+        break
+      // 二重耐性
+      case -2:
+        payload.resist2.push(data)
+        break
+      // 三重耐性
+      case -3:
+        payload.resist3.push(data)
+        break
+    }
+  })
+
+  return payload
 }
 
 const sidebarReducer = (state = initialState, action) => {

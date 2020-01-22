@@ -1,0 +1,206 @@
+{
+    "Normal": {
+        "week": [
+            "Fighting"
+        ],
+        "resistance": [
+        ],
+        "no_effect": [
+            "Ghost"
+        ],
+        "ja": "ノーマル"
+    },
+    "Fighting": {
+        "week": [
+            "Flying", "Psychic", "Fairy"
+        ],
+        "resistance": [
+            "Bug", "Rock", "Dark"
+        ],
+        "no_effect": [
+        ],
+        "ja": "かくとう"
+    },
+    "Flying": {
+        "week": [
+            "Rock", "Electric", "Ice"
+        ],
+        "resistance": [
+            "Fighting", "Bug", "Grass"
+        ],
+        "no_effect": [
+            "Ground"
+        ],
+        "ja": "ひこう"
+    },
+    "Poison": {
+        "week": [
+            "Ground", "Psychic"
+        ],
+        "resistance": [
+            "Fighting", "Poison", "Bug", "Grass", "Fairy"
+        ],
+        "no_effect": [
+        ],
+        "ja": "どく"
+    },
+    "Ground": {
+        "week": [
+            "Water", "Grass", "Ice"
+        ],
+        "resistance": [
+            "Poison", "Rock"
+        ],
+        "no_effect": [
+            "Electric"
+        ],
+        "ja": "じめん"
+    },
+    "Rock": {
+        "week": [
+            "Fighting", "Ground", "Steel", "Water", "Grass"
+        ],
+        "resistance": [
+            "Normal", "Poison", "Flying", "Fire"
+        ],
+        "no_effect": [
+        ],
+        "ja": "いわ"
+    },
+    "Bug": {
+        "week": [
+            "Flying", "Rock", "Fire"
+        ],
+        "resistance": [
+            "Fighting", "Ground", "Grass"
+        ],
+        "no_effect": [
+        ],
+        "ja": "むし"
+    },
+    "Ghost": {
+        "week": [
+            "Ghost", "Dark"
+        ],
+        "resistance": [
+            "Poison", "Bug"
+        ],
+        "no_effect": [
+            "Normal", "Fighting"
+        ],
+        "ja": "ゴースト"
+    },
+    "Steel": {
+        "week": [
+            "Fighting", "Ground", "Fire"
+        ],
+        "resistance": [
+            "Normal", "Flying", "Bug", "Rock", "Steel", "Grass", "Ice", "Psychic", "Dragon", "Fairy"
+        ],
+        "no_effect": [
+            "Poison"
+        ],
+        "ja": "はがね"
+    },
+    "Fire": {
+        "week": [
+            "Ground", "Rock", "Water"
+        ],
+        "resistance": [
+            "Bug", "Steel", "Fire", "Grass", "Ice", "Fairy"
+        ],
+        "no_effect": [
+        ],
+        "ja": "ほのお"
+    },
+    "Water": {
+        "week": [
+            "Electric", "Grass"
+        ],
+        "resistance": [
+            "Steel", "Fire", "Water", "Ice"
+        ],
+        "no_effect": [
+        ],
+        "ja": "みず"
+    },
+    "Grass": {
+        "week": [
+            "Poison", "Flying", "Bug", "Fire", "Ice"
+        ],
+        "resistance": [
+            "Ground", "Water", "Electric", "Grass"
+        ],
+        "no_effect": [
+        ],
+        "ja": "くさ"
+    },
+    "Electric": {
+        "week": [
+            "Ground"
+        ],
+        "resistance": [
+            "Flying", "Steel", "Electric"
+        ],
+        "no_effect": [
+        ],
+        "ja": "でんき"
+    },
+    "Psychic": {
+        "week": [
+            "Bug", "Ghost", "Dark"
+        ],
+        "resistance": [
+            "Fighting", "Psychic"
+        ],
+        "no_effect": [
+        ],
+        "ja": "エスパー"
+    },
+    "Ice": {
+        "week": [
+            "Fighting", "Rock", "Steel", "Fire"
+        ],
+        "resistance": [
+            "Ice"
+        ],
+        "no_effect": [
+        ],
+        "ja": "こおり"
+    },
+    "Dragon": {
+        "week": [
+            "Ice", "Dragon", "Fairy"
+        ],
+        "resistance": [
+            "Fire", "Water", "Electric", "Grass"
+        ],
+        "no_effect": [
+        ],
+        "ja": "ドラゴン"
+    },
+    "Dark": {
+        "week": [
+            "Fighting", "Bug", "Fairy"
+        ],
+        "resistance": [
+            "Ghost", "Dark"
+        ],
+        "no_effect": [
+            "Psychic"
+        ],
+        "ja": "あく"
+    },
+    "Fairy": {
+        "week": [
+            "Poison", "Steel"
+        ],
+        "resistance": [
+            "Fighting", "Bug", "Dark"
+        ],
+        "no_effect": [
+            "Dragon"
+        ],
+        "ja": "フェアリー"
+    }
+}
