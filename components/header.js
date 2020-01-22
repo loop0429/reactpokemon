@@ -23,7 +23,7 @@ const Header = () => {
   const { handleAboutClick, handleMenuClick } = useHeader()
   return (
     <header className="fixed w-full bg-white shadow-md">
-      <div className="flex justify-between items-center max-w-6xl mx-auto px-2 py-3">
+      <div className="flex justify-between items-center max-w-5xl mx-auto px-2 py-3">
         <button type="button" onClick={handleMenuClick}>
           <FontAwesomeIcon icon={faBars} size="2x" />
         </button>
