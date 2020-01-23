@@ -74,7 +74,7 @@ const calcWeakRegist = (index) => {
     // 無効※ポケGoでは二重耐性
     const noEffects = typeData.no_effect
     noEffects.forEach((noEffect) => {
-      wsData[noEffect] = (wsData[noEffect]) ? wsData[noEffect] - 1 : -1
+      wsData[noEffect] = (wsData[noEffect]) ? wsData[noEffect] - 2 : -2
     })
   })
 
