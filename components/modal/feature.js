@@ -1,6 +1,15 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+
+const useFeature = () => {
+  const weakResist = useSelector((state) => state.modalReducer.weakResist)
+
+  return { weakResist }
+}
 
 const Feature = () => {
+  const { weakResist } = useFeature()
+
   return (
     <>
       <h3 className="mb-2">機能紹介</h3>
