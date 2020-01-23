@@ -173,13 +173,14 @@ const filteringReducer = (state = initialState, action) => {
       let types = state.selectedTypes.slice()
       if (state.selectedTypes.includes(action.pokeType)) {
         types = state.selectedTypes.filter((pokemon) => {
-          return pokemon !== action.no
+          return pokemon !== action.pokeType
         })
       } else {
-        types.push(action.type)
+        types.push(action.pokeType)
       }
 
       filtered = filteringTypes(types)
+
       return {
         ...state,
         selectedTypes: types,
@@ -207,9 +208,33 @@ const filteringReducer = (state = initialState, action) => {
   }
 }
 
+const sortPokemonList = (list) => {
+  list.sort((a, b) => {
+    if(a.id > b.id) return 1
+    if(a.id < b.id) return -1
+    return 0
+  })
+
+  return list
+}
+
 const filteringTypes = (data) => {
-  console.log(data)
-  return []
+  const dummyData = []
+  data.forEach((type) => {
+    pokedex.forEach((pokemon) => {
+      if(pokemon.type.includes(type)) {
+        dummyData.push(pokemon)
+      }
+    })
+  })
+
+  // 重複するデータを削除
+  const payload = dummyData.filter((value, index, self) => {
+    return self.indexOf(value) === index
+  })
+
+  // ソート実行したものを返す
+  return sortPokemonList(payload)
 }
 
 const filteringSeries = (data) => {

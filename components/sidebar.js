@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Collapse } from 'react-collapse'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleSidebar } from '../actions'
+import { toggleSidebar, filteringTypes } from '../actions'
 import { TYPES, SERIES } from '../constans'
 
 const useSidebar = () => {
@@ -12,11 +12,15 @@ const useSidebar = () => {
     dispatch(toggleSidebar())
   }
 
-  return { isOpenSidebar, handleOverlayClick }
+  const handleFilterTypeClick = (type) => {
+    dispatch(filteringTypes(type))
+  }
+
+  return { isOpenSidebar, handleOverlayClick, handleFilterTypeClick }
 }
 
 const Sidebar = () => {
-  const { isOpenSidebar, handleOverlayClick } = useSidebar()
+  const { isOpenSidebar, handleOverlayClick, handleFilterTypeClick } = useSidebar()
 
   let sidebarClass = 'sidebar'
   if (isOpenSidebar === true) {
@@ -60,7 +64,7 @@ const Sidebar = () => {
                 {TYPES.map((item) => {
                   return (
                     <li key={item.en} className="filter-child__item">
-                      <button className="relative w-full filter-child__btn" type="button">
+                      <button className="relative w-full filter-child__btn" type="button" onClick={() => {handleFilterTypeClick(item.en)}}>
                         <div className="relative flex items-center p-2 z-10">
                           <img className="mr-1" src={`/static/img/icon/type-${item.en}.png`} width="15" />
                           {item.ja}
