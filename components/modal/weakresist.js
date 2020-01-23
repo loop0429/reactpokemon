@@ -13,20 +13,26 @@ const WeakResist = () => {
     <>
       <table className="border-collapse text-sm">
         <tbody>
-          {Object.keys(weakResist).map((item, index) => {
-            return (
-              <tr key={index}>
-                <th>{item.name}</th>
-                <td>
-                  <ul className="flex flex-wrap">
-                    <li className="flex items-center mr-1">
-                      <img className="mr-1" src={item.img} width="15" />
-                      <span>{item.type}</span>
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-            )
+          {Object.keys(weakResist).map((item) => {
+            if (weakResist[item].types.length !== 0) {
+              return (
+                <tr key={item}>
+                  <th>{weakResist[item].name}</th>
+                  <td>
+                    <ul className="flex flex-wrap">
+                      {weakResist[item].types.map((data) => {
+                        return (
+                          <li key={data.type} className="flex items-center mr-1">
+                            <img className="mr-1" src={data.img} width="15" />
+                            <span>{data.type}</span>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </td>
+                </tr>
+              )
+            }
           })}
         </tbody>
       </table>

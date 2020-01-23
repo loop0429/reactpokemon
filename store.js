@@ -26,7 +26,8 @@ const modalReducer = (state = initialState, action) => {
       return {
         ...state,
         isOpenModal: true,
-        switchModalContent: action.content
+        switchModalContent: action.content,
+        weakResist: {}
       }
     case SHOW_WEAKREGIST_MODAL:
       const weakResist = calcWeakRegist(action.payload.index)
@@ -39,7 +40,8 @@ const modalReducer = (state = initialState, action) => {
     case HIDE_MODAL:
       return {
         ...state,
-        isOpenModal: false
+        isOpenModal: false,
+        weakResist: {}
       }
     default:
       return state
