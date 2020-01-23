@@ -7,24 +7,25 @@ import { hideModal } from '../actions'
 const useModal = () => {
   const isOpenModal = useSelector((state) => state.modalReducer.isOpenModal)
   const switchModalContent = useSelector((state) => state.modalReducer.switchModalContent)
+  const weakResist = useSelector((state) => state.modalReducer.weakResist)
+
+  const content = switchModalContent === 'FEATURE' ? Feature() : WeakResist(weakResist)
 
   const dispatch = useDispatch()
   const handleOverlayClick = () => {
     dispatch(hideModal())
   }
 
-  return { isOpenModal, switchModalContent, handleOverlayClick }
+  return { isOpenModal, content, handleOverlayClick }
 }
 
 const Modal = () => {
-  const { isOpenModal, switchModalContent, handleOverlayClick } = useModal()
+  const { isOpenModal, content, handleOverlayClick } = useModal()
 
   let modalClass = 'modal'
   if (isOpenModal === true) {
     modalClass = `${modalClass} is-open`
   }
-
-  const content = switchModalContent === 'FEATURE' ? Feature() : WeakResist()
 
   return (
     <div className={modalClass}>

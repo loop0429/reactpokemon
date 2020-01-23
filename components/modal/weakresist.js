@@ -1,14 +1,6 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 
-const useWeakResist = () => {
-  const weakResist = useSelector((state) => state.modalReducer.weakResist)
-
-  return { weakResist }
-}
-
-const WeakResist = () => {
-  const { weakResist } = useWeakResist()
+const WeakResist = (weakResist) => {
   return (
     <>
       <table className="border-collapse text-sm">
