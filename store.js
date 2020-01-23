@@ -15,7 +15,7 @@ const initialState = {
   isOpenSidebar: false,
   favoritesPokemon: [],
   weakResist: {},
-  filteredZukan: [],
+  filteredZukan: pokedex,
   selectedTypes: [],
   selectedSeries: ''
 }
@@ -180,6 +180,11 @@ const filteringReducer = (state = initialState, action) => {
       }
 
       filtered = filteringTypes(types)
+
+      // データが空ならpokedex.jsonの全データを使用する
+      if (filtered.length === 0) {
+        filtered = pokedex
+      }
 
       return {
         ...state,

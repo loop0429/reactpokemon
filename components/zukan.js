@@ -4,24 +4,24 @@ import { showWeakResistModal, toggleFavarite } from '../actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
-import pokedex from '../pokedex.json'
 
 const useZukan = () => {
-  const dispatch = useDispatch()
+  const filteredZukan = useSelector((state) => state.filteringReducer.filteredZukan)
 
+  const dispatch = useDispatch()
   const handlePokemonClick = (index) => {
     dispatch(showWeakResistModal(index))
   }
 
-  return { handlePokemonClick }
+  return { filteredZukan, handlePokemonClick }
 }
 
 const Zukan = () => {
-  const { handlePokemonClick } = useZukan()
+  const { filteredZukan, handlePokemonClick } = useZukan()
   return (
     <div className="max-w-5xl mx-auto px-3 sm:px-0">
       <ul className="flex flex-wrap justify-between sm:justify-start pt-20 sm:pt-24 zukan__list">
-        {pokedex.map((item, index) => {
+        {filteredZukan.map((item, index) => {
           return (
             <li key={item.id} className="mb-3 zukan__item">
               <div className="sm:mx-2 shadow-md">
