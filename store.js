@@ -208,7 +208,7 @@ const filteringReducer = (state = initialState, action) => {
         ...state,
         selectedTypes: [],
         selectedSeries: '',
-        filteredZukan: filtered
+        filteredZukan: pokedex
       }
     default:
       return state

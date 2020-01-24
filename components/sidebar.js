@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Collapse } from 'react-collapse'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleSidebar, filteringTypes, filteringSeries } from '../actions'
+import { toggleSidebar, filteringTypes, filteringSeries, filteringClear } from '../actions'
 import { TYPES, SERIES } from '../constans'
 
 const useSidebar = () => {
@@ -20,11 +20,15 @@ const useSidebar = () => {
     dispatch(filteringSeries(series))
   }
 
-  return { isOpenSidebar, handleOverlayClick, handleFilterTypeClick, handleFilterSeriesClick }
+  const handleFilterClearClick = () => {
+    dispatch(filteringClear())
+  }
+
+  return { isOpenSidebar, handleOverlayClick, handleFilterTypeClick, handleFilterSeriesClick, handleFilterClearClick }
 }
 
 const Sidebar = () => {
-  const { isOpenSidebar, handleOverlayClick, handleFilterTypeClick, handleFilterSeriesClick } = useSidebar()
+  const { isOpenSidebar, handleOverlayClick, handleFilterTypeClick, handleFilterSeriesClick, handleFilterClearClick } = useSidebar()
 
   let sidebarClass = 'sidebar'
   if (isOpenSidebar === true) {
@@ -78,7 +82,7 @@ const Sidebar = () => {
                   )
                 })}
                 <li>
-                  <button className="w-full p-2 bg-gray-200 text-left btn-clear-filter" type="button">選択をクリア</button>
+                  <button className="w-full p-2 bg-gray-200 text-left btn-clear-filter" type="button" onClick={() => {handleFilterClearClick()}}>選択をクリア</button>
                 </li>
               </ul>
             </Collapse>
@@ -105,7 +109,7 @@ const Sidebar = () => {
                   )
                 })}
                 <li>
-                  <button className="w-full p-2 bg-gray-200 text-left btn-clear-filter" type="button">選択をクリア</button>
+                  <button className="w-full p-2 bg-gray-200 text-left btn-clear-filter" type="button" onClick={() => {handleFilterClearClick()}}>選択をクリア</button>
                 </li>
               </ul>
             </Collapse>
