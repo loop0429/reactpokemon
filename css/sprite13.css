@@ -1,0 +1,307 @@
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+```html
+<i class="icon-home"></i>
+```
+*/
+.icon-601MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -40px 0px;
+  width: 40px;
+  height: 40px;
+}
+.icon-602MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -200px 0px;
+  width: 40px;
+  height: 40px;
+}
+.icon-603MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: 0px -40px;
+  width: 40px;
+  height: 40px;
+}
+.icon-604MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -40px -40px;
+  width: 40px;
+  height: 40px;
+}
+.icon-605MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -80px 0px;
+  width: 40px;
+  height: 40px;
+}
+.icon-606MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -80px -40px;
+  width: 40px;
+  height: 40px;
+}
+.icon-607MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: 0px -80px;
+  width: 40px;
+  height: 40px;
+}
+.icon-608MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -40px -80px;
+  width: 40px;
+  height: 40px;
+}
+.icon-609MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -80px -80px;
+  width: 40px;
+  height: 40px;
+}
+.icon-610MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -120px 0px;
+  width: 40px;
+  height: 40px;
+}
+.icon-611MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -120px -40px;
+  width: 40px;
+  height: 40px;
+}
+.icon-612MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -120px -80px;
+  width: 40px;
+  height: 40px;
+}
+.icon-613MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: 0px -120px;
+  width: 40px;
+  height: 40px;
+}
+.icon-614MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -40px -120px;
+  width: 40px;
+  height: 40px;
+}
+.icon-615MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -80px -120px;
+  width: 40px;
+  height: 40px;
+}
+.icon-616MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -120px -120px;
+  width: 40px;
+  height: 40px;
+}
+.icon-617MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -160px 0px;
+  width: 40px;
+  height: 40px;
+}
+.icon-618MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -160px -40px;
+  width: 40px;
+  height: 40px;
+}
+.icon-619MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -160px -80px;
+  width: 40px;
+  height: 40px;
+}
+.icon-620MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -160px -120px;
+  width: 40px;
+  height: 40px;
+}
+.icon-621MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: 0px -160px;
+  width: 40px;
+  height: 40px;
+}
+.icon-622MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -40px -160px;
+  width: 40px;
+  height: 40px;
+}
+.icon-623MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -80px -160px;
+  width: 40px;
+  height: 40px;
+}
+.icon-624MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -120px -160px;
+  width: 40px;
+  height: 40px;
+}
+.icon-625MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -160px -160px;
+  width: 40px;
+  height: 40px;
+}
+.icon-626MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: 0px 0px;
+  width: 40px;
+  height: 40px;
+}
+.icon-627MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -200px -40px;
+  width: 40px;
+  height: 40px;
+}
+.icon-628MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -200px -80px;
+  width: 40px;
+  height: 40px;
+}
+.icon-629MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -200px -120px;
+  width: 40px;
+  height: 40px;
+}
+.icon-630MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -200px -160px;
+  width: 40px;
+  height: 40px;
+}
+.icon-631MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: 0px -200px;
+  width: 40px;
+  height: 40px;
+}
+.icon-632MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -40px -200px;
+  width: 40px;
+  height: 40px;
+}
+.icon-633MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -80px -200px;
+  width: 40px;
+  height: 40px;
+}
+.icon-634MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -120px -200px;
+  width: 40px;
+  height: 40px;
+}
+.icon-635MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -160px -200px;
+  width: 40px;
+  height: 40px;
+}
+.icon-636MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -200px -200px;
+  width: 40px;
+  height: 40px;
+}
+.icon-637MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -240px 0px;
+  width: 40px;
+  height: 40px;
+}
+.icon-638MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -240px -40px;
+  width: 40px;
+  height: 40px;
+}
+.icon-639MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -240px -80px;
+  width: 40px;
+  height: 40px;
+}
+.icon-640MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -240px -120px;
+  width: 40px;
+  height: 40px;
+}
+.icon-641MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -240px -160px;
+  width: 40px;
+  height: 40px;
+}
+.icon-642MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -240px -200px;
+  width: 40px;
+  height: 40px;
+}
+.icon-643MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: 0px -240px;
+  width: 40px;
+  height: 40px;
+}
+.icon-644MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -40px -240px;
+  width: 40px;
+  height: 40px;
+}
+.icon-645MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -80px -240px;
+  width: 40px;
+  height: 40px;
+}
+.icon-646MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -120px -240px;
+  width: 40px;
+  height: 40px;
+}
+.icon-647MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -160px -240px;
+  width: 40px;
+  height: 40px;
+}
+.icon-648MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -200px -240px;
+  width: 40px;
+  height: 40px;
+}
+.icon-649MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -240px -240px;
+  width: 40px;
+  height: 40px;
+}
+.icon-650MS {
+  background-image: url(/static/img/sprite13.png);
+  background-position: -280px 0px;
+  width: 40px;
+  height: 40px;
+}
