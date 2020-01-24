@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Collapse } from 'react-collapse'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleSidebar, filteringTypes } from '../actions'
+import { toggleSidebar, filteringTypes, filteringSeries } from '../actions'
 import { TYPES, SERIES } from '../constans'
 
 const useSidebar = () => {
@@ -16,11 +16,15 @@ const useSidebar = () => {
     dispatch(filteringTypes(type))
   }
 
-  return { isOpenSidebar, handleOverlayClick, handleFilterTypeClick }
+  const handleFilterSeriesClick = (series) => {
+    dispatch(filteringSeries(series))
+  }
+
+  return { isOpenSidebar, handleOverlayClick, handleFilterTypeClick, handleFilterSeriesClick }
 }
 
 const Sidebar = () => {
-  const { isOpenSidebar, handleOverlayClick, handleFilterTypeClick } = useSidebar()
+  const { isOpenSidebar, handleOverlayClick, handleFilterTypeClick, handleFilterSeriesClick } = useSidebar()
 
   let sidebarClass = 'sidebar'
   if (isOpenSidebar === true) {
@@ -92,7 +96,7 @@ const Sidebar = () => {
                 {SERIES.map((item) => {
                   return (
                     <li key={item.numbers} className="filter-child__item">
-                      <button className="relative w-full filter-child__btn" type="button">
+                      <button className="relative w-full filter-child__btn" type="button" onClick={() => {handleFilterSeriesClick(item.numbers)}}>
                         <div className="relative flex items-center p-2 z-10">
                           {item.area}
                         </div>

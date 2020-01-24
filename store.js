@@ -194,7 +194,9 @@ const filteringReducer = (state = initialState, action) => {
       }
     case FILTERING_SERIES:
       const selectedSeries = action.series
+
       filtered = filteringSeries(selectedSeries)
+
       return {
         ...state,
         selectedTypes: [],
@@ -243,8 +245,11 @@ const filteringTypes = (data) => {
 }
 
 const filteringSeries = (data) => {
-  console.log(data)
-  return []
+  const splitId = data.split('-')
+  const start = Number(splitId[0]) - 1
+  const end = Number(splitId[1]) - 1
+
+  return pokedex.slice(start, end)
 }
 
 const reducer = combineReducers({
