@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { showWeakResistModal, toggleFavarite } from '../actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,17 +7,22 @@ import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
 
 const useZukan = () => {
   const filteredZukan = useSelector((state) => state.filteringReducer.filteredZukan)
+  const favoritesPokemon  = useSelector((state) => state.favariteReducer.favoritesPokemon)
 
   const dispatch = useDispatch()
   const handlePokemonClick = (index) => {
     dispatch(showWeakResistModal(index))
   }
 
-  return { filteredZukan, handlePokemonClick }
+  const handleFavariteClick = (id) => {
+    dispatch(toggleFavarite(id))
+  }
+
+  return { filteredZukan, favoritesPokemon, handlePokemonClick, handleFavariteClick }
 }
 
 const Zukan = () => {
-  const { filteredZukan, handlePokemonClick } = useZukan()
+  const { filteredZukan, favoritesPokemon, handlePokemonClick, handleFavariteClick } = useZukan()
   return (
     <div className="max-w-5xl mx-auto px-3 sm:px-0">
       <ul className="flex flex-wrap justify-between sm:justify-start pt-20 sm:pt-24 zukan__list">
@@ -26,9 +31,8 @@ const Zukan = () => {
             <li key={item.id} className="mb-3 zukan__item">
               <div className="sm:mx-2 shadow-md">
                 <div className="flex justify-end pt-2 pr-2">
-                  <button className="leading-none" type="button">
-                    <FontAwesomeIcon className="text-pink-400" icon={faHeart} />
-                    <FontAwesomeIcon className="text-pink-400" icon={farHeart} />
+                  <button className="leading-none" type="button" onClick={() => {handleFavariteClick(item.id)}}>
+                    <FontAwesomeIcon className="text-pink-400" icon={favoritesPokemon.includes(item.id) ? faHeart : farHeart} />
                   </button>
                 </div>
                 <div className="pb-1 sm:pb-2 cursor-pointer text-center zukan__btn" onClick={() => {handlePokemonClick(index)}}>

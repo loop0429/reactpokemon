@@ -150,12 +150,12 @@ const favariteReducer = (state = initialState, action) => {
   switch (action.type) {
     case TOGGLE_FAVARITE:
       let favorites = state.favoritesPokemon.slice()
-      if (state.favoritesPokemon.includes(action.no)) {
+      if (state.favoritesPokemon.includes(action.id)) {
         favorites = state.favoritesPokemon.filter((pokemon) => {
-          return pokemon !== action.no
+          return pokemon !== action.id
         })
       } else {
-        favorites.push(action.no)
+        favorites.push(action.id)
       }
       return {
         ...state,
