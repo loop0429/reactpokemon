@@ -6,8 +6,8 @@ import {
   TOGGLE_FAVARITE, FILTERING_TYPES,
   FILTERING_SERIES, FILTERING_CLEAR
 } from './actions'
-import pokedex from './pokedex.json'
-import weakResistDex from './weak_resist.json'
+import pokedex from './assets/pokedex.json'
+import weakResistDex from './assets/weak_resist.json'
 
 const initialState = {
   isOpenModal: false,

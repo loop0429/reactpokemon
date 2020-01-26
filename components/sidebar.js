@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Collapse } from 'react-collapse'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleSidebar, filteringTypes } from '../actions'
-import { TYPES, SERIES } from '../constans'
+import { TYPES, SERIES } from '../assets/constans'
 
 const useSidebar = () => {
   const isOpenSidebar = useSelector((state) => state.sidebarReducer.isOpenSidebar)
