@@ -1,5 +1,4 @@
 import React from 'react'
-import { withRedux } from '../lib/redux'
 import Header from '../components/header'
 import Zukan from '../components/zukan'
 import Sidebar from '../components/sidebar'
@@ -16,4 +15,4 @@ const IndexPage = () => {
   )
 }
 
-export default withRedux(IndexPage)
+export default IndexPage
