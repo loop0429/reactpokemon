@@ -1,15 +1,22 @@
 import React, { useState } from 'react'
 import { Collapse } from 'react-collapse'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleSidebar, filteringTypes, filteringSeries, filteringClear } from '../actions'
+import { toggleSidebar, filteringFavorites, filteringTypes, filteringSeries, filteringClear } from '../actions'
 import { TYPES, SERIES } from '../assets/constans'
 
 const useSidebar = () => {
   const isOpenSidebar = useSelector((state) => state.sidebarReducer.isOpenSidebar)
+  const selectedTypes = useSelector((state) => state.filteringReducer.selectedTypes)
+  const selectedSeries = useSelector((state) => state.filteringReducer.selectedSeries)
+  const favoritesPokemon = useSelector((state) => state.favariteReducer.favoritesPokemon)
 
   const dispatch = useDispatch()
   const handleOverlayClick = () => {
     dispatch(toggleSidebar())
+  }
+
+  const handleFilterFavoritesClick = () => {
+    dispatch(filteringFavorites(favoritesPokemon))
   }
 
   const handleFilterTypeClick = (type) => {
@@ -24,11 +31,29 @@ const useSidebar = () => {
     dispatch(filteringClear())
   }
 
-  return { isOpenSidebar, handleOverlayClick, handleFilterTypeClick, handleFilterSeriesClick, handleFilterClearClick }
+  return {
+    isOpenSidebar,
+    selectedTypes,
+    selectedSeries,
+    handleFilterFavoritesClick,
+    handleOverlayClick,
+    handleFilterTypeClick,
+    handleFilterSeriesClick,
+    handleFilterClearClick
+  }
 }
 
 const Sidebar = () => {
-  const { isOpenSidebar, handleOverlayClick, handleFilterTypeClick, handleFilterSeriesClick, handleFilterClearClick } = useSidebar()
+  const {
+    isOpenSidebar,
+    selectedTypes,
+    selectedSeries,
+    handleFilterFavoritesClick,
+    handleOverlayClick,
+    handleFilterTypeClick,
+    handleFilterSeriesClick,
+    handleFilterClearClick
+  } = useSidebar()
 
   let sidebarClass = 'sidebar'
   if (isOpenSidebar === true) {
@@ -57,7 +82,13 @@ const Sidebar = () => {
         <dl className="m-0">
           <dt className="p-2 bg-gray-200">絞り込み検索</dt>
           <dd className="text-sm">
-            <button className="block w-full p-2 bg-blue-600 text-white text-left btn-filter" type="button">お気に入りポケモンで絞り込み</button>
+            <button
+              className="block w-full p-2 bg-blue-600 text-white text-left btn-filter"
+              type="button"
+              onClick={() => {handleFilterFavoritesClick()}}
+            >
+              お気に入りポケモンで絞り込み
+            </button>
           </dd>
           <dd className="text-sm">
             <button
@@ -72,7 +103,14 @@ const Sidebar = () => {
                 {TYPES.map((item) => {
                   return (
                     <li key={item.en} className="filter-child__item">
-                      <button className="relative w-full filter-child__btn" type="button" onClick={() => {handleFilterTypeClick(item.en)}}>
+                      <button
+                        className={selectedTypes.includes(item.en) ?
+                          "relative w-full bg-gray-100 filter-child__btn" :
+                          "relative w-full filter-child__btn"
+                        }
+                        type="button"
+                        onClick={() => {handleFilterTypeClick(item.en)}}
+                      >
                         <div className="relative flex items-center p-2 z-10">
                           <img className="mr-1" src={`/static/img/icon/type-${item.en}.png`} width="15" />
                           {item.ja}
@@ -100,7 +138,14 @@ const Sidebar = () => {
                 {SERIES.map((item) => {
                   return (
                     <li key={item.numbers} className="filter-child__item">
-                      <button className="relative w-full filter-child__btn" type="button" onClick={() => {handleFilterSeriesClick(item.numbers)}}>
+                      <button
+                        className={selectedSeries === item.numbers ?
+                          "relative w-full bg-gray-100 filter-child__btn" :
+                          "relative w-full filter-child__btn"
+                        }
+                        type="button"
+                        onClick={() => {handleFilterSeriesClick(item.numbers)}}
+                      >
                         <div className="relative flex items-center p-2 z-10">
                           {item.area}
                         </div>

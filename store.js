@@ -1,10 +1,14 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import { persistReducer } from 'redux-persist'
+import { createWhitelistFilter } from 'redux-persist-transform-filter'
+import storage from 'redux-persist/lib/storage'
 import {
   SHOW_FEATURE_MODAL, SHOW_WEAKREGIST_MODAL,
   HIDE_MODAL, TOGGLE_SIDEBAR,
   TOGGLE_FAVARITE, FILTERING_TYPES,
-  FILTERING_SERIES, FILTERING_CLEAR
+  FILTERING_SERIES, FILTERING_FAVORITES,
+  FILTERING_CLEAR
 } from './actions'
 import pokedex from './assets/pokedex.json'
 import weakResistDex from './assets/weak_resist.json'
@@ -157,6 +161,7 @@ const favariteReducer = (state = initialState, action) => {
       } else {
         favorites.push(action.id)
       }
+
       return {
         ...state,
         favoritesPokemon: favorites
@@ -201,6 +206,17 @@ const filteringReducer = (state = initialState, action) => {
         ...state,
         selectedTypes: [],
         selectedSeries,
+        filteredZukan: filtered
+      }
+    case FILTERING_FAVORITES:
+      const favoritesPokemon = action.favoritesPokemon
+
+      filtered = filteringFavorites(favoritesPokemon)
+
+      return {
+        ...state,
+        selectedTypes: [],
+        selectedSeries: '',
         filteredZukan: filtered
       }
     case FILTERING_CLEAR:
@@ -252,6 +268,29 @@ const filteringSeries = (data) => {
   return pokedex.slice(start, end)
 }
 
+const filteringFavorites = (data) => {
+  const payload = []
+
+  data.forEach((id) => {
+    pokedex.forEach((pokemon) => {
+      if (pokemon.id.includes(id)) {
+        payload.push(pokemon)
+      }
+    })
+  })
+
+  // ソート実行したものを返す
+  return sortPokemonList(payload)
+}
+
+const persistConfig = {
+  key: 'pkmzfavorite',
+  storage,
+  transforms: [
+    createWhitelistFilter('favariteReducer', ['favoritesPokemon'])
+  ]
+}
+
 const reducer = combineReducers({
   modalReducer,
   sidebarReducer,
@@ -259,9 +298,11 @@ const reducer = combineReducers({
   filteringReducer
 })
 
+const persistedReducer = persistReducer(persistConfig, reducer)
+
 export const initializeStore = (preloadedState = initialState) => {
   return createStore(
-    reducer,
+    persistedReducer,
     preloadedState,
     composeWithDevTools(applyMiddleware())
   )
