@@ -8,10 +8,12 @@ import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
 const useHeader = () => {
   const dispatch = useDispatch()
 
+  // 右上のアバウトボタン押下時
   const handleAboutClick = () => {
     dispatch(showFeatureModal())
   }
 
+  // 左上のメニューボタン押下時
   const handleMenuClick = () => {
     dispatch(toggleSidebar())
   }
@@ -24,12 +26,26 @@ const Header = () => {
   return (
     <header className="fixed w-full bg-white shadow-md">
       <div className="flex justify-between items-center max-w-5xl mx-auto px-2 py-3">
-        <button className="btn-header" type="button" onClick={() => {handleMenuClick()}}>
-          <FontAwesomeIcon icon={faBars} size="2x" />
+        <button
+          className="btn-header"
+          type="button"
+          onClick={() => {handleMenuClick()}}
+        >
+          <FontAwesomeIcon
+            icon={faBars}
+            size="2x"
+          />
         </button>
         <h1 className="text-2xl lg:text-4xl font-semibold text-center">ポケモンGO図鑑</h1>
-        <button className="btn-header" type="button" onClick={() => {handleAboutClick()}}>
-          <FontAwesomeIcon icon={faQuestionCircle} size="2x" />
+        <button
+          className="btn-header"
+          type="button"
+          onClick={() => {handleAboutClick()}}
+        >
+          <FontAwesomeIcon
+            icon={faQuestionCircle}
+            size="2x"
+          />
         </button>
       </div>
       <style jsx>{`

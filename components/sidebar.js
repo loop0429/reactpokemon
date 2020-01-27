@@ -1,32 +1,43 @@
 import React, { useState } from 'react'
 import { Collapse } from 'react-collapse'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleSidebar, filteringFavorites, filteringTypes, filteringSeries, filteringClear } from '../actions'
+import {
+  toggleSidebar, filteringFavorites,
+  filteringTypes, filteringSeries,
+  filteringClear
+} from '../actions'
 import { TYPES, SERIES } from '../assets/constans'
 
 const useSidebar = () => {
+  // state
   const isOpenSidebar = useSelector((state) => state.sidebarReducer.isOpenSidebar)
   const selectedTypes = useSelector((state) => state.filteringReducer.selectedTypes)
   const selectedSeries = useSelector((state) => state.filteringReducer.selectedSeries)
   const favoritesPokemon = useSelector((state) => state.favariteReducer.favoritesPokemon)
 
   const dispatch = useDispatch()
+
+  // 背景のoverlay押下時
   const handleOverlayClick = () => {
     dispatch(toggleSidebar())
   }
 
+  // 「お気に入りポケモンで絞り込み」押下時
   const handleFilterFavoritesClick = () => {
     dispatch(filteringFavorites(favoritesPokemon))
   }
 
+  // 「タイプで絞り込み」押下時
   const handleFilterTypeClick = (type) => {
     dispatch(filteringTypes(type))
   }
 
+  // 「シリーズで絞り込み」押下時
   const handleFilterSeriesClick = (series) => {
     dispatch(filteringSeries(series))
   }
 
+  // 「選択をクリア」押下時
   const handleFilterClearClick = () => {
     dispatch(filteringClear())
   }
@@ -35,8 +46,8 @@ const useSidebar = () => {
     isOpenSidebar,
     selectedTypes,
     selectedSeries,
-    handleFilterFavoritesClick,
     handleOverlayClick,
+    handleFilterFavoritesClick,
     handleFilterTypeClick,
     handleFilterSeriesClick,
     handleFilterClearClick
@@ -48,13 +59,14 @@ const Sidebar = () => {
     isOpenSidebar,
     selectedTypes,
     selectedSeries,
-    handleFilterFavoritesClick,
     handleOverlayClick,
+    handleFilterFavoritesClick,
     handleFilterTypeClick,
     handleFilterSeriesClick,
     handleFilterClearClick
   } = useSidebar()
 
+  // isOpenSidebar: trueならサイドバーを表示させる
   let sidebarClass = 'sidebar'
   if (isOpenSidebar === true) {
     sidebarClass = `${sidebarClass} is-open`
@@ -77,7 +89,10 @@ const Sidebar = () => {
 
   return (
     <div className={sidebarClass}>
-      <div className="sidebar__overlay" onClick={() => {handleOverlayClick()}} />
+      <div
+        className="sidebar__overlay"
+        onClick={() => {handleOverlayClick()}}
+      />
       <div className="sidebar__wrapper">
         <dl className="m-0">
           <dt className="p-2 bg-gray-200">絞り込み検索</dt>
@@ -98,11 +113,18 @@ const Sidebar = () => {
             >
               タイプで絞り込み
             </button>
-            <Collapse isOpened={isOpened.types} initialStyle={{height: '0px', overflow: 'hidden'}}>
+            <Collapse
+              isOpened={isOpened.types}
+              initialStyle={{height: '0px', overflow: 'hidden'}}
+            >
               <ul className="filter-child__list">
                 {TYPES.map((item) => {
+                  // タイプ一覧の表示
                   return (
-                    <li key={item.en} className="filter-child__item">
+                    <li
+                      key={item.en}
+                      className="filter-child__item"
+                    >
                       <button
                         className={selectedTypes.includes(item.en) ?
                           "relative w-full bg-gray-200 filter-child__btn" :
@@ -112,7 +134,11 @@ const Sidebar = () => {
                         onClick={() => {handleFilterTypeClick(item.en)}}
                       >
                         <div className="relative flex items-center p-2 z-10">
-                          <img className="mr-1" src={`/static/img/icon/type-${item.en}.png`} width="15" />
+                          <img
+                            className="mr-1"
+                            src={`/static/img/icon/type-${item.en}.png`}
+                            width="15"
+                          />
                           {item.ja}
                         </div>
                       </button>
@@ -120,7 +146,13 @@ const Sidebar = () => {
                   )
                 })}
                 <li>
-                  <button className="w-full p-2 bg-gray-200 text-left btn-clear-filter" type="button" onClick={() => {handleFilterClearClick()}}>選択をクリア</button>
+                  <button
+                    className="w-full p-2 bg-gray-200 text-left btn-clear-filter"
+                    type="button"
+                    onClick={() => {handleFilterClearClick()}}
+                  >
+                    選択をクリア
+                  </button>
                 </li>
               </ul>
             </Collapse>
@@ -133,11 +165,18 @@ const Sidebar = () => {
             >
               シリーズで絞り込み
             </button>
-            <Collapse isOpened={isOpened.series} initialStyle={{height: '0px', overflow: 'hidden'}}>
+            <Collapse
+              isOpened={isOpened.series}
+              initialStyle={{height: '0px', overflow: 'hidden'}}
+            >
               <ul className="filter-child__list">
                 {SERIES.map((item) => {
+                  // シリーズ一覧の表示
                   return (
-                    <li key={item.numbers} className="filter-child__item">
+                    <li
+                      key={item.numbers}
+                      className="filter-child__item"
+                    >
                       <button
                         className={selectedSeries === item.numbers ?
                           "relative w-full bg-gray-200 filter-child__btn" :
@@ -146,15 +185,19 @@ const Sidebar = () => {
                         type="button"
                         onClick={() => {handleFilterSeriesClick(item.numbers)}}
                       >
-                        <div className="relative flex items-center p-2 z-10">
-                          {item.area}
-                        </div>
+                        <div className="relative flex items-center p-2 z-10">{item.area}</div>
                       </button>
                     </li>
                   )
                 })}
                 <li>
-                  <button className="w-full p-2 bg-gray-200 text-left btn-clear-filter" type="button" onClick={() => {handleFilterClearClick()}}>選択をクリア</button>
+                  <button
+                    className="w-full p-2 bg-gray-200 text-left btn-clear-filter"
+                    type="button"
+                    onClick={() => {handleFilterClearClick()}}
+                  >
+                    選択をクリア
+                  </button>
                 </li>
               </ul>
             </Collapse>

@@ -5,13 +5,17 @@ import { useSelector, useDispatch } from 'react-redux'
 import { hideModal } from '../actions'
 
 const useModal = () => {
+  // state
   const isOpenModal = useSelector((state) => state.modalReducer.isOpenModal)
   const switchModalContent = useSelector((state) => state.modalReducer.switchModalContent)
   const weakResist = useSelector((state) => state.modalReducer.weakResist)
 
+  // header右上のボタン押下なら機能紹介・ポケモン押下なら弱点耐性表のモーダルを表示
   const content = switchModalContent === 'FEATURE' ? Feature() : WeakResist(weakResist)
 
   const dispatch = useDispatch()
+
+  // 背景のoverlay押下時
   const handleOverlayClick = () => {
     dispatch(hideModal())
   }
@@ -22,6 +26,7 @@ const useModal = () => {
 const Modal = () => {
   const { isOpenModal, content, handleOverlayClick } = useModal()
 
+  // isOpenModal: trueならモーダルを表示させる
   let modalClass = 'modal'
   if (isOpenModal === true) {
     modalClass = `${modalClass} is-open`
@@ -29,10 +34,11 @@ const Modal = () => {
 
   return (
     <div className={modalClass}>
-      <div className="modal__overlay" onClick={() => {handleOverlayClick()}} />
-      <div className="modal__content">
-        {content}
-      </div>
+      <div
+        className="modal__overlay"
+        onClick={() => {handleOverlayClick()}}
+      />
+      <div className="modal__content">{content}</div>
       <style jsx>{`
         .modal {
           display: none;

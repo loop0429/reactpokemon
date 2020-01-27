@@ -6,6 +6,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
 
 const useZukan = () => {
+  // state
   const filteredZukan = useSelector((state) => state.filteringReducer.filteredZukan)
   const favoritesPokemon  = useSelector((state) => state.favariteReducer.favoritesPokemon)
 
