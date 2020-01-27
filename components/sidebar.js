@@ -207,6 +207,9 @@ const Sidebar = () => {
         .filter-child__btn:hover:after {
           width: 100%;
         }
+        .filter-child__btn:focus {
+          outline: none;
+        }
         .btn-filter {
           margin-bottom: 1px;
           transition: opacity 0.2s ease-in-out;
@@ -214,11 +217,17 @@ const Sidebar = () => {
         .btn-filter:hover {
           opacity: 0.7;
         }
+        .btn-filter:focus {
+          outline: none;
+        }
         .btn-clear-filter {
           transition: opacity 0.2s ease-in-out;
         }
         .btn-clear-filter:hover {
           opacity: 0.7;
+        }
+        .btn-clear-filter:focus {
+          outline: none;
         }
       `}</style>
     </div>

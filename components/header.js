@@ -24,14 +24,19 @@ const Header = () => {
   return (
     <header className="fixed w-full bg-white shadow-md">
       <div className="flex justify-between items-center max-w-5xl mx-auto px-2 py-3">
-        <button type="button" onClick={() => {handleMenuClick()}}>
+        <button className="btn-header" type="button" onClick={() => {handleMenuClick()}}>
           <FontAwesomeIcon icon={faBars} size="2x" />
         </button>
         <h1 className="text-2xl lg:text-4xl font-semibold text-center">ポケモンGO図鑑</h1>
-        <button type="button" onClick={() => {handleAboutClick()}}>
+        <button className="btn-header" type="button" onClick={() => {handleAboutClick()}}>
           <FontAwesomeIcon icon={faQuestionCircle} size="2x" />
         </button>
       </div>
+      <style jsx>{`
+      .btn-header:focus {
+        outline: none;
+      }
+      `}</style>
     </header>
   )
 }

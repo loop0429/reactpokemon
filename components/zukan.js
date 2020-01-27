@@ -31,7 +31,7 @@ const Zukan = () => {
             <li key={item.id} className="mb-3 zukan__item">
               <div className="sm:mx-2 shadow-md">
                 <div className="flex justify-end pt-2 pr-2">
-                  <button className="leading-none" type="button" onClick={() => {handleFavariteClick(item.id)}}>
+                  <button className="leading-none btn-favorite" type="button" onClick={() => {handleFavariteClick(item.id)}}>
                     <FontAwesomeIcon className="text-pink-400" icon={favoritesPokemon.includes(item.id) ? faHeart : farHeart} />
                   </button>
                 </div>
@@ -69,6 +69,9 @@ const Zukan = () => {
       }
       .zukan__btn:hover {
         opacity: 0.7;
+      }
+      .btn-favorite:focus {
+        outline: none;
       }
       `}</style>
     </div>
