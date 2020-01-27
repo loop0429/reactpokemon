@@ -13,11 +13,11 @@ export const showFeatureModal = () => ({
   content: 'FEATURE'
 })
 
-export const showWeakResistModal = (index) => ({
+export const showWeakResistModal = (id) => ({
   type: SHOW_WEAKREGIST_MODAL,
   payload: {
     content: 'WEAK_RESIST',
-    index
+    id
   }
 })
 

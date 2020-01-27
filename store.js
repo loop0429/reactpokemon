@@ -34,7 +34,7 @@ const modalReducer = (state = initialState, action) => {
         weakResist: {}
       }
     case SHOW_WEAKREGIST_MODAL:
-      const weakResist = calcWeakRegist(action.payload.index)
+      const weakResist = calcWeakRegist(action.payload.id)
       return {
         ...state,
         isOpenModal: true,
@@ -52,8 +52,11 @@ const modalReducer = (state = initialState, action) => {
   }
 }
 
-const calcWeakRegist = (index) => {
-  const pokemonData = pokedex[index]
+const calcWeakRegist = (id) => {
+  const pokemonData = pokedex.find((pokemon) => {
+    return pokemon.id === id
+  })
+
   const types = pokemonData.type
   const wsData = {}
 

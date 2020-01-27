@@ -10,8 +10,8 @@ const useZukan = () => {
   const favoritesPokemon  = useSelector((state) => state.favariteReducer.favoritesPokemon)
 
   const dispatch = useDispatch()
-  const handlePokemonClick = (index) => {
-    dispatch(showWeakResistModal(index))
+  const handlePokemonClick = (id) => {
+    dispatch(showWeakResistModal(id))
   }
 
   const handleFavariteClick = (id) => {
@@ -26,7 +26,7 @@ const Zukan = () => {
   return (
     <div className="max-w-5xl mx-auto px-3 sm:px-0">
       <ul className="flex flex-wrap justify-between sm:justify-start pt-20 sm:pt-24 zukan__list">
-        {filteredZukan.map((item, index) => {
+        {filteredZukan.map((item) => {
           return (
             <li key={item.id} className="mb-3 zukan__item">
               <div className="sm:mx-2 shadow-md">
@@ -35,7 +35,7 @@ const Zukan = () => {
                     <FontAwesomeIcon className="text-pink-400" icon={favoritesPokemon.includes(item.id) ? faHeart : farHeart} />
                   </button>
                 </div>
-                <div className="pb-1 sm:pb-2 cursor-pointer text-center zukan__btn" onClick={() => {handlePokemonClick(index)}}>
+                <div className="pb-1 sm:pb-2 cursor-pointer text-center zukan__btn" onClick={() => {handlePokemonClick(item.id)}}>
                   <div className={`mx-auto icon-${item.id}MS`} />
                   <span className="inline-block text-xs">{`No.${item.id}`}</span>
                   <ul className="inline-block">
