@@ -150,12 +150,12 @@ const favariteReducer = (state = initialState, action) => {
   switch (action.type) {
     case TOGGLE_FAVARITE:
       let favorites = state.favoritesPokemon.slice()
-      if (state.favoritesPokemon.includes(action.no)) {
+      if (state.favoritesPokemon.includes(action.id)) {
         favorites = state.favoritesPokemon.filter((pokemon) => {
-          return pokemon !== action.no
+          return pokemon !== action.id
         })
       } else {
-        favorites.push(action.no)
+        favorites.push(action.id)
       }
       return {
         ...state,
@@ -194,7 +194,9 @@ const filteringReducer = (state = initialState, action) => {
       }
     case FILTERING_SERIES:
       const selectedSeries = action.series
+
       filtered = filteringSeries(selectedSeries)
+
       return {
         ...state,
         selectedTypes: [],
@@ -206,7 +208,7 @@ const filteringReducer = (state = initialState, action) => {
         ...state,
         selectedTypes: [],
         selectedSeries: '',
-        filteredZukan: filtered
+        filteredZukan: pokedex
       }
     default:
       return state
@@ -243,8 +245,11 @@ const filteringTypes = (data) => {
 }
 
 const filteringSeries = (data) => {
-  console.log(data)
-  return []
+  const splitId = data.split('-')
+  const start = Number(splitId[0]) - 1
+  const end = Number(splitId[1]) - 1
+
+  return pokedex.slice(start, end)
 }
 
 const reducer = combineReducers({

@@ -3,14 +3,14 @@ import React from 'react'
 const WeakResist = (weakResist) => {
   return (
     <>
-      <table className="border-collapse text-sm">
+      <table className="border-collapse text-sm weekresist__table">
         <tbody>
           {Object.keys(weakResist).map((item) => {
             if (weakResist[item].types.length !== 0) {
               return (
-                <tr key={item}>
-                  <th>{weakResist[item].name}</th>
-                  <td>
+                <tr key={item} className="weekresist__row">
+                  <th className="weekresist__th">{weakResist[item].name}</th>
+                  <td className="weekresist__td">
                     <ul className="flex flex-wrap">
                       {weakResist[item].types.map((data) => {
                         return (
@@ -29,17 +29,18 @@ const WeakResist = (weakResist) => {
         </tbody>
       </table>
       <style jsx>{`
-        table {
+        .weekresist__table {
           width: 100%;
         }
-        tr:nth-child(odd) {
+        .weekresist__row:nth-child(odd) {
           background: #f7fafc;
         }
-        th, td {
+        .weekresist__th,
+        .weekresist__td {
           padding: 0.5em;
           border: 1px solid rgba(0, 0, 0, 0.1);
         }
-        th {
+        .weekresist__th {
           white-space: nowrap;
         }
       `}</style>

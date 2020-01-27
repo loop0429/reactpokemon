@@ -28,9 +28,9 @@ export const toggleSidebar = () => ({
   type: TOGGLE_SIDEBAR
 })
 
-export const toggleFavarite = (no) => ({
+export const toggleFavarite = (id) => ({
   type: TOGGLE_FAVARITE,
-  no
+  id
 })
 
 export const filteringTypes = (pokeType) => ({
