@@ -47,8 +47,8 @@ const Zukan = () => {
                       )
                     })}
                   </ul>
-                  <span className="block text-sm">{item.jname}</span>
-                  <span className="block text-gray-400 text-xs">{item.ename}</span>
+                  <span className="block text-sm">{item.name.japanese}</span>
+                  <span className="block text-gray-400 text-xs">{item.name.english}</span>
                 </div>
               </div>
             </li>

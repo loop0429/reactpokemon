@@ -92,6 +92,6 @@ export const SERIES = [
   },
   {
     area: 'イッシュ地方',
-    numbers: '494-649'
+    numbers: '494-650'
   }
 ]
