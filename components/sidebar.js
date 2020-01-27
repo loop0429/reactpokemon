@@ -105,7 +105,7 @@ const Sidebar = () => {
                     <li key={item.en} className="filter-child__item">
                       <button
                         className={selectedTypes.includes(item.en) ?
-                          "relative w-full bg-gray-100 filter-child__btn" :
+                          "relative w-full bg-gray-200 filter-child__btn" :
                           "relative w-full filter-child__btn"
                         }
                         type="button"
@@ -140,7 +140,7 @@ const Sidebar = () => {
                     <li key={item.numbers} className="filter-child__item">
                       <button
                         className={selectedSeries === item.numbers ?
-                          "relative w-full bg-gray-100 filter-child__btn" :
+                          "relative w-full bg-gray-200 filter-child__btn" :
                           "relative w-full filter-child__btn"
                         }
                         type="button"
