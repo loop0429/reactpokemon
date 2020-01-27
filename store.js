@@ -1,5 +1,8 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import { persistReducer } from 'redux-persist'
+import { createWhitelistFilter } from 'redux-persist-transform-filter'
+import storage from 'redux-persist/lib/storage'
 import {
   SHOW_FEATURE_MODAL, SHOW_WEAKREGIST_MODAL,
   HIDE_MODAL, TOGGLE_SIDEBAR,
@@ -280,6 +283,14 @@ const filteringFavorites = (data) => {
   return sortPokemonList(payload)
 }
 
+const persistConfig = {
+  key: 'pkmzfavorite',
+  storage,
+  transforms: [
+    createWhitelistFilter('favariteReducer', ['favoritesPokemon'])
+  ]
+}
+
 const reducer = combineReducers({
   modalReducer,
   sidebarReducer,
@@ -287,9 +298,11 @@ const reducer = combineReducers({
   filteringReducer
 })
 
+const persistedReducer = persistReducer(persistConfig, reducer)
+
 export const initializeStore = (preloadedState = initialState) => {
   return createStore(
-    reducer,
+    persistedReducer,
     preloadedState,
     composeWithDevTools(applyMiddleware())
   )
