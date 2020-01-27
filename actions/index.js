@@ -5,6 +5,7 @@ export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR'
 export const TOGGLE_FAVARITE = 'TOGGLE_FAVARITE'
 export const FILTERING_TYPES = 'FILTERING_TYPES'
 export const FILTERING_SERIES = 'FILTERING_SERIES'
+export const FILTERING_FAVORITES = 'FILTERING_FAVORITES'
 export const FILTERING_CLEAR = 'FILTERING_CLEAR'
 
 export const showFeatureModal = () => ({
@@ -41,6 +42,11 @@ export const filteringTypes = (pokeType) => ({
 export const filteringSeries = (series) => ({
   type: FILTERING_SERIES,
   series
+})
+
+export const filteringFavorites = (favoritesPokemon) => ({
+  type: FILTERING_FAVORITES,
+  favoritesPokemon
 })
 
 export const filteringClear = () => ({

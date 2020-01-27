@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
 import { Collapse } from 'react-collapse'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleSidebar, filteringTypes, filteringSeries, filteringClear } from '../actions'
+import { toggleSidebar, filteringFavorites, filteringTypes, filteringSeries, filteringClear } from '../actions'
 import { TYPES, SERIES } from '../assets/constans'
 
 const useSidebar = () => {
   const isOpenSidebar = useSelector((state) => state.sidebarReducer.isOpenSidebar)
+  const favoritesPokemon = useSelector((state) => state.favariteReducer.favoritesPokemon)
 
   const dispatch = useDispatch()
   const handleOverlayClick = () => {
     dispatch(toggleSidebar())
+  }
+
+  const handleFilterFavoritesClick = () => {
+    dispatch(filteringFavorites(favoritesPokemon))
   }
 
   const handleFilterTypeClick = (type) => {
@@ -24,11 +29,25 @@ const useSidebar = () => {
     dispatch(filteringClear())
   }
 
-  return { isOpenSidebar, handleOverlayClick, handleFilterTypeClick, handleFilterSeriesClick, handleFilterClearClick }
+  return {
+    isOpenSidebar,
+    handleFilterFavoritesClick,
+    handleOverlayClick,
+    handleFilterTypeClick,
+    handleFilterSeriesClick,
+    handleFilterClearClick
+  }
 }
 
 const Sidebar = () => {
-  const { isOpenSidebar, handleOverlayClick, handleFilterTypeClick, handleFilterSeriesClick, handleFilterClearClick } = useSidebar()
+  const {
+    isOpenSidebar,
+    handleFilterFavoritesClick,
+    handleOverlayClick,
+    handleFilterTypeClick,
+    handleFilterSeriesClick,
+    handleFilterClearClick
+  } = useSidebar()
 
   let sidebarClass = 'sidebar'
   if (isOpenSidebar === true) {
@@ -57,7 +76,13 @@ const Sidebar = () => {
         <dl className="m-0">
           <dt className="p-2 bg-gray-200">絞り込み検索</dt>
           <dd className="text-sm">
-            <button className="block w-full p-2 bg-blue-600 text-white text-left btn-filter" type="button">お気に入りポケモンで絞り込み</button>
+            <button
+              className="block w-full p-2 bg-blue-600 text-white text-left btn-filter"
+              type="button"
+              onClick={() => {handleFilterFavoritesClick()}}
+            >
+              お気に入りポケモンで絞り込み
+            </button>
           </dd>
           <dd className="text-sm">
             <button

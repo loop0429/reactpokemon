@@ -4,7 +4,8 @@ import {
   SHOW_FEATURE_MODAL, SHOW_WEAKREGIST_MODAL,
   HIDE_MODAL, TOGGLE_SIDEBAR,
   TOGGLE_FAVARITE, FILTERING_TYPES,
-  FILTERING_SERIES, FILTERING_CLEAR
+  FILTERING_SERIES, FILTERING_FAVORITES,
+  FILTERING_CLEAR
 } from './actions'
 import pokedex from './assets/pokedex.json'
 import weakResistDex from './assets/weak_resist.json'
@@ -157,6 +158,7 @@ const favariteReducer = (state = initialState, action) => {
       } else {
         favorites.push(action.id)
       }
+
       return {
         ...state,
         favoritesPokemon: favorites
@@ -201,6 +203,17 @@ const filteringReducer = (state = initialState, action) => {
         ...state,
         selectedTypes: [],
         selectedSeries,
+        filteredZukan: filtered
+      }
+    case FILTERING_FAVORITES:
+      const favoritesPokemon = action.favoritesPokemon
+
+      filtered = filteringFavorites(favoritesPokemon)
+
+      return {
+        ...state,
+        selectedTypes: [],
+        selectedSeries: '',
         filteredZukan: filtered
       }
     case FILTERING_CLEAR:
@@ -250,6 +263,21 @@ const filteringSeries = (data) => {
   const end = Number(splitId[1]) - 1
 
   return pokedex.slice(start, end)
+}
+
+const filteringFavorites = (data) => {
+  const payload = []
+
+  data.forEach((id) => {
+    pokedex.forEach((pokemon) => {
+      if (pokemon.id.includes(id)) {
+        payload.push(pokemon)
+      }
+    })
+  })
+
+  // ソート実行したものを返す
+  return sortPokemonList(payload)
 }
 
 const reducer = combineReducers({
