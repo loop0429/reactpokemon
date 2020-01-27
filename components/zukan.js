@@ -56,23 +56,23 @@ const Zukan = () => {
         })}
       </ul>
       <style jsx>{`
-      .zukan__item {
-        width: 31%;
-      }
-      @media (min-width: 640px) {
         .zukan__item {
-          width: 20%;
+          width: 31%;
         }
-      }
-      .zukan__btn {
-        transition: opacity 0.2s ease-in-out;
-      }
-      .zukan__btn:hover {
-        opacity: 0.7;
-      }
-      .btn-favorite:focus {
-        outline: none;
-      }
+        @media (min-width: 640px) {
+          .zukan__item {
+            width: 20%;
+          }
+        }
+        .zukan__btn {
+          transition: opacity 0.2s ease-in-out;
+        }
+        .zukan__btn:hover {
+          opacity: 0.7;
+        }
+        .btn-favorite:focus {
+          outline: none;
+        }
       `}</style>
     </div>
   )

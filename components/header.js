@@ -33,9 +33,9 @@ const Header = () => {
         </button>
       </div>
       <style jsx>{`
-      .btn-header:focus {
-        outline: none;
-      }
+        .btn-header:focus {
+          outline: none;
+        }
       `}</style>
     </header>
   )
