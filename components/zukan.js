@@ -11,39 +11,67 @@ const useZukan = () => {
   const favoritesPokemon  = useSelector((state) => state.favariteReducer.favoritesPokemon)
 
   const dispatch = useDispatch()
+
+  // ポケモン押下時
   const handlePokemonClick = (id) => {
     dispatch(showWeakResistModal(id))
   }
 
+  // お気に入りボタン（ハート）押下時
   const handleFavariteClick = (id) => {
     dispatch(toggleFavarite(id))
   }
 
-  return { filteredZukan, favoritesPokemon, handlePokemonClick, handleFavariteClick }
+  return {
+    filteredZukan, favoritesPokemon,
+    handlePokemonClick, handleFavariteClick
+  }
 }
 
 const Zukan = () => {
-  const { filteredZukan, favoritesPokemon, handlePokemonClick, handleFavariteClick } = useZukan()
+  const {
+    filteredZukan, favoritesPokemon,
+    handlePokemonClick, handleFavariteClick
+  } = useZukan()
   return (
     <div className="max-w-5xl mx-auto px-3 sm:px-0">
       <ul className="flex flex-wrap justify-between sm:justify-start pt-20 sm:pt-24 zukan__list">
         {filteredZukan.map((item) => {
           return (
-            <li key={item.id} className="mb-3 zukan__item">
+            <li
+              key={item.id}
+              className="mb-3 zukan__item"
+            >
               <div className="sm:mx-2 shadow-md">
                 <div className="flex justify-end pt-2 pr-2">
-                  <button className="leading-none btn-favorite" type="button" onClick={() => {handleFavariteClick(item.id)}}>
-                    <FontAwesomeIcon className="text-pink-400" icon={favoritesPokemon.includes(item.id) ? faHeart : farHeart} />
+                  <button
+                    className="leading-none btn-favorite"
+                    type="button"
+                    onClick={() => {handleFavariteClick(item.id)}}
+                  >
+                    <FontAwesomeIcon
+                      className="text-pink-400"
+                      icon={favoritesPokemon.includes(item.id) ? faHeart : farHeart}
+                    />
                   </button>
                 </div>
-                <div className="pb-1 sm:pb-2 cursor-pointer text-center zukan__btn" onClick={() => {handlePokemonClick(item.id)}}>
+                <div
+                  className="pb-1 sm:pb-2 cursor-pointer text-center zukan__btn"
+                  onClick={() => {handlePokemonClick(item.id)}}
+                >
                   <div className={`mx-auto icon-${item.id}MS`} />
                   <span className="inline-block text-xs">{`No.${item.id}`}</span>
                   <ul className="inline-block">
                     {item.type.map((types) => {
                       return (
-                        <li key={types} className="inline-block ml-1">
-                          <img src={`/static/img/icon/type-${types}.png`} width="15" />
+                        <li
+                          key={types}
+                          className="inline-block ml-1"
+                        >
+                          <img
+                            src={`/static/img/icon/type-${types}.png`}
+                            width="15"
+                          />
                         </li>
                       )
                     })}
