@@ -24,7 +24,7 @@ const useHeader = () => {
 const Header = () => {
   const { handleFeatureClick, handleMenuClick } = useHeader()
   return (
-    <header className="fixed w-full bg-white shadow-md">
+    <header className="fixed w-full bg-white shadow-md z-10">
       <div className="flex justify-between items-center max-w-5xl mx-auto px-2 py-3">
         <button
           className="btn-header"
