@@ -43,48 +43,54 @@ const useSidebar = () => {
   }
 
   return {
-    isOpenSidebar,
-    selectedTypes,
-    selectedSeries,
-    handleOverlayClick,
-    handleFilterFavoritesClick,
-    handleFilterTypeClick,
-    handleFilterSeriesClick,
-    handleFilterClearClick
+    isOpenSidebar, selectedTypes,
+    selectedSeries, handleOverlayClick,
+    handleFilterFavoritesClick, handleFilterTypeClick,
+    handleFilterSeriesClick, handleFilterClearClick
   }
 }
 
-const Sidebar = () => {
-  const {
-    isOpenSidebar,
-    selectedTypes,
-    selectedSeries,
-    handleOverlayClick,
-    handleFilterFavoritesClick,
-    handleFilterTypeClick,
-    handleFilterSeriesClick,
-    handleFilterClearClick
-  } = useSidebar()
-
-  // isOpenSidebar: trueならサイドバーを表示させる
-  let sidebarClass = 'sidebar'
-  if (isOpenSidebar === true) {
-    sidebarClass = `${sidebarClass} is-open`
-  }
-
+const useCollapse = () => {
+  // collapseの開閉状態
+  // types: タイプで絞り込み / series: シリーズで絞り込み
   const isCollapseOpened = {
     types: false,
     series: false
   }
 
+  // stateの設定
+  // cf., https://ja.reactjs.org/docs/hooks-state.html
   const [isOpened, setCollapseOpened] = useState(isCollapseOpened)
 
+  // collapseのトグル
   const toggleCollapse = (e) => {
     const payload = {}
     Object.keys(isOpened).forEach((key) => {
-      payload[key] = (e === key) ? !isOpened[e] : false
+      // 選択したものなら、Booleanをtoggle
+      // 選択したものでなければ閉じる（閉じてても閉じる）
+      payload[key] = e === key ? !isOpened[e] : false
     })
+
     setCollapseOpened(payload)
+  }
+
+  return { isOpened, toggleCollapse }
+}
+
+const Sidebar = () => {
+  const {
+    isOpenSidebar, selectedTypes,
+    selectedSeries, handleOverlayClick,
+    handleFilterFavoritesClick, handleFilterTypeClick,
+    handleFilterSeriesClick, handleFilterClearClick
+  } = useSidebar()
+
+  const { isOpened, toggleCollapse } = useCollapse()
+
+  // isOpenSidebar: trueならサイドバーを表示させる
+  let sidebarClass = 'sidebar'
+  if (isOpenSidebar === true) {
+    sidebarClass = `${sidebarClass} is-open`
   }
 
   return (

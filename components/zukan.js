@@ -49,6 +49,7 @@ const Zukan = () => {
                     type="button"
                     onClick={() => {handleFavariteClick(item.id)}}
                   >
+                    {/* お気に入りにidが含まれていたらfontAwesome変更 */}
                     <FontAwesomeIcon
                       className="text-pink-400"
                       icon={favoritesPokemon.includes(item.id) ? faHeart : farHeart}
