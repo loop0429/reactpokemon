@@ -8,8 +8,8 @@ import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
 const useHeader = () => {
   const dispatch = useDispatch()
 
-  // 右上のアバウトボタン押下時
-  const handleAboutClick = () => {
+  // 右上のフィーチャーボタン押下時
+  const handleFeatureClick = () => {
     dispatch(showFeatureModal())
   }
 
@@ -18,11 +18,11 @@ const useHeader = () => {
     dispatch(toggleSidebar())
   }
 
-  return { handleAboutClick, handleMenuClick }
+  return { handleFeatureClick, handleMenuClick }
 }
 
 const Header = () => {
-  const { handleAboutClick, handleMenuClick } = useHeader()
+  const { handleFeatureClick, handleMenuClick } = useHeader()
   return (
     <header className="fixed w-full bg-white shadow-md">
       <div className="flex justify-between items-center max-w-5xl mx-auto px-2 py-3">
@@ -40,7 +40,7 @@ const Header = () => {
         <button
           className="btn-header"
           type="button"
-          onClick={() => {handleAboutClick()}}
+          onClick={() => {handleFeatureClick()}}
         >
           <FontAwesomeIcon
             icon={faQuestionCircle}
