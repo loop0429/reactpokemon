@@ -2,7 +2,7 @@ export const SHOW_FEATURE_MODAL = 'SHOW_FEATURE_MODAL'
 export const SHOW_WEAKREGIST_MODAL = 'SHOW_WEAKREGIST_MODAL'
 export const HIDE_MODAL = 'HIDE_MODAL'
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR'
-export const TOGGLE_FAVARITE = 'TOGGLE_FAVARITE'
+export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE'
 export const FILTERING_TYPES = 'FILTERING_TYPES'
 export const FILTERING_SERIES = 'FILTERING_SERIES'
 export const FILTERING_FAVORITES = 'FILTERING_FAVORITES'
@@ -29,8 +29,8 @@ export const toggleSidebar = () => ({
   type: TOGGLE_SIDEBAR
 })
 
-export const toggleFavarite = (id) => ({
-  type: TOGGLE_FAVARITE,
+export const toggleFavorite = (id) => ({
+  type: TOGGLE_FAVORITE,
   id
 })
 

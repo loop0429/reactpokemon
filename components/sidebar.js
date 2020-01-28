@@ -13,7 +13,7 @@ const useSidebar = () => {
   const isOpenSidebar = useSelector((state) => state.sidebarReducer.isOpenSidebar)
   const selectedTypes = useSelector((state) => state.filteringReducer.selectedTypes)
   const selectedSeries = useSelector((state) => state.filteringReducer.selectedSeries)
-  const favoritesPokemon = useSelector((state) => state.favariteReducer.favoritesPokemon)
+  const favoritesPokemon = useSelector((state) => state.favoriteReducer.favoritesPokemon)
 
   const dispatch = useDispatch()
 

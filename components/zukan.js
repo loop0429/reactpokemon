@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { showWeakResistModal, toggleFavarite } from '../actions'
+import { showWeakResistModal, toggleFavorite } from '../actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
@@ -8,7 +8,7 @@ import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
 const useZukan = () => {
   // state
   const filteredZukan = useSelector((state) => state.filteringReducer.filteredZukan)
-  const favoritesPokemon  = useSelector((state) => state.favariteReducer.favoritesPokemon)
+  const favoritesPokemon  = useSelector((state) => state.favoriteReducer.favoritesPokemon)
 
   const dispatch = useDispatch()
 
@@ -18,20 +18,20 @@ const useZukan = () => {
   }
 
   // お気に入りボタン（ハート）押下時
-  const handleFavariteClick = (id) => {
-    dispatch(toggleFavarite(id))
+  const handleFavoriteClick = (id) => {
+    dispatch(toggleFavorite(id))
   }
 
   return {
     filteredZukan, favoritesPokemon,
-    handlePokemonClick, handleFavariteClick
+    handlePokemonClick, handleFavoriteClick
   }
 }
 
 const Zukan = () => {
   const {
     filteredZukan, favoritesPokemon,
-    handlePokemonClick, handleFavariteClick
+    handlePokemonClick, handleFavoriteClick
   } = useZukan()
   return (
     <div className="max-w-5xl mx-auto px-3 sm:px-0">
@@ -47,7 +47,7 @@ const Zukan = () => {
                   <button
                     className="leading-none btn-favorite"
                     type="button"
-                    onClick={() => {handleFavariteClick(item.id)}}
+                    onClick={() => {handleFavoriteClick(item.id)}}
                   >
                     {/* お気に入りにidが含まれていたらfontAwesome変更 */}
                     <FontAwesomeIcon
