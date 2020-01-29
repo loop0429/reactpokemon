@@ -1,7 +1,6 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { persistReducer } from 'redux-persist'
-import { createWhitelistFilter } from 'redux-persist-transform-filter'
 import storage from 'redux-persist/lib/storage'
 import modalReducer, { modalState } from './reducers/modal'
 import sidebarReducer, { sidebarState } from './reducers/sidebar'
@@ -15,14 +14,10 @@ const initialState = {
   ...filteringState
 }
 
-// TODO: 思った通りに設定できてない
 // persistの設定
 const persistConfig = {
   key: 'pkmzfavorite',
-  storage,
-  transforms: [
-    createWhitelistFilter('favoriteReducer', ['favoritesPokemon'])
-  ]
+  storage
 }
 
 // reducerを一つにまとめる
