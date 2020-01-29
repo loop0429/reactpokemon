@@ -1,13 +1,16 @@
 import {
   FILTERING_TYPES, FILTERING_SERIES,
-  FILTERING_FAVORITES, FILTERING_CLEAR
+  FILTERING_FAVORITES, FILTERING_CLEAR,
+  UPDATE_PAGE, RESET_PAGE
 } from '../actions'
 import pokedex from '../assets/pokedex.json'
 
 export const filteringState = {
-  filteredZukan: pokedex,
+  filteredZukan: pokedex.slice(0, 35),
   selectedTypes: [],
-  selectedSeries: ''
+  selectedSeries: '',
+  page: 1,
+  hasMore: true
 }
 
 const filteringReducer = (state = filteringState, action) => {
@@ -70,6 +73,22 @@ const filteringReducer = (state = filteringState, action) => {
         selectedTypes: [],
         selectedSeries: '',
         filteredZukan: pokedex
+      }
+    // pageのカウントアップ
+    case UPDATE_PAGE:
+      const page = state.page + 1
+      const end = page * 35
+
+      return {
+        ...state,
+        page,
+        filteredZukan: pokedex.slice(0, end)
+      }
+    // pageのリセット
+    case RESET_PAGE:
+      return {
+        ...state,
+        page: 0
       }
     default:
       return state
