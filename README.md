@@ -2,8 +2,9 @@
 
 ## 開発環境
 ```
-yarn
-yarn dev
+yarn // モジュールのインストール
+yarn dev // 開発モード
+yarn spritesmith // .spritesmith.jsを元にスプライト画像を生成
 ```
 
 ## 注意
@@ -11,4 +12,6 @@ yarn dev
   - デフォルトでredux-persistのサンプルを使わなかったので、書き直すのがめんどくさくなったので諦めた
 
 ## データについて
-こちらを利用 https://github.com/fanzeyi/pokemon.json
+- 図鑑データ https://github.com/fanzeyi/pokemon.json
+- tailwindcss https://tailwindcss.com/
+- fontAwesome https://fontawesome.com/
