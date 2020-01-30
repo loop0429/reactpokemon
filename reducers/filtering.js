@@ -1,12 +1,15 @@
 import {
   FILTERING_TYPES, FILTERING_SERIES,
   FILTERING_FAVORITES, FILTERING_CLEAR,
-  UPDATE_PAGE, RESET_PAGE
+  UPDATE_PAGE
 } from '../actions'
 import pokedex from '../assets/pokedex.json'
 
+const INCREASE = 35
+
 export const filteringState = {
-  filteredZukan: pokedex.slice(0, 35),
+  filteredZukan: pokedex.slice(0, INCREASE),
+  rowZukan: pokedex,
   selectedTypes: [],
   selectedSeries: '',
   page: 1,
@@ -14,7 +17,12 @@ export const filteringState = {
 }
 
 const filteringReducer = (state = filteringState, action) => {
-  let filtered = []
+  let rowZukan = []
+  let page = 1
+  let end = 1
+  let hasMore = true
+  let payload = {}
+
   switch (action.type) {
     // タイプで絞り込み
     case FILTERING_TYPES:
@@ -32,39 +40,57 @@ const filteringReducer = (state = filteringState, action) => {
 
       // typesが空でなければtypesから一致するポケモンデータを返してもらう
       // 空ならpokedexの全データを使用する
-      filtered = types.length > 0 ? filteringTypes(types) : pokedex
+      rowZukan = types.length > 0 ? filteringTypes(types) : pokedex
+
+      // inifite scroll対応
+      payload = checkFilteredData(rowZukan)
 
       return {
         ...state,
         selectedTypes: types,
         selectedSeries: '',
-        filteredZukan: filtered
+        filteredZukan: payload.zukan,
+        rowZukan,
+        page: 1,
+        hasMore: payload.hasMore
       }
     // シリーズで絞り込み
     case FILTERING_SERIES:
       const selectedSeries = action.series
 
       // 選択したシリーズから一致するポケモンデータを返してもらう
-      filtered = filteringSeries(selectedSeries)
+      rowZukan = filteringSeries(selectedSeries)
+
+      // inifite scroll対応
+      payload = checkFilteredData(rowZukan)
 
       return {
         ...state,
         selectedTypes: [],
         selectedSeries,
-        filteredZukan: filtered
+        filteredZukan: payload.zukan,
+        rowZukan,
+        page: 1,
+        hasMore: payload.hasMore
       }
     // お気に入りポケモンで絞り込み
     case FILTERING_FAVORITES:
       const favoritesPokemon = action.favoritesPokemon
 
       // お気に入り登録されているidから一致するポケモンデータを返してもらう
-      filtered = filteringFavorites(favoritesPokemon)
+      rowZukan = filteringFavorites(favoritesPokemon)
+
+      // inifite scroll対応
+      payload = checkFilteredData(rowZukan)
 
       return {
         ...state,
         selectedTypes: [],
         selectedSeries: '',
-        filteredZukan: filtered
+        filteredZukan: payload.zukan,
+        rowZukan,
+        page: 1,
+        hasMore: payload.hasMore
       }
     // 選択をクリア
     case FILTERING_CLEAR:
@@ -72,32 +98,28 @@ const filteringReducer = (state = filteringState, action) => {
         ...state,
         selectedTypes: [],
         selectedSeries: '',
-        filteredZukan: pokedex
+        filteredZukan: pokedex.slice(0, INCREASE),
+        rowZukan: pokedex,
+        page: 1,
+        hasMore: true
       }
     // pageのカウントアップ
     case UPDATE_PAGE:
-      const page = state.page + 1
-      let end = page * 35
-      let hasMore = true
+      page = state.page + 1
+      end = page * INCREASE
+      hasMore = true
 
-      // 図鑑番号を超えたら
-      if (end > pokedex.length) {
-        end = pokedex.length
+      // rowZukanの件数を超えたら
+      if (end > state.rowZukan.length) {
+        end = state.rowZukan.length
         hasMore = false
       }
 
       return {
         ...state,
         page,
-        filteredZukan: pokedex.slice(0, end),
+        filteredZukan: state.rowZukan.slice(0, end),
         hasMore
-      }
-    // pageのリセット
-    case RESET_PAGE:
-      return {
-        ...state,
-        page: 0,
-        hasMore: true
       }
     default:
       return state
@@ -165,6 +187,22 @@ const filteringFavorites = (data) => {
 
   // id順にソートしたデータを返す
   return sortPokemonList(payload)
+}
+
+// 絞り込みかけられたdataからinfinite scroller稼働の可否を精査
+const checkFilteredData = (data) => {
+  const payload = {
+    hasMore: false,
+    zukan: data
+  }
+
+  // データ件数が35件超えてるかを判別
+  if (data.length > INCREASE) {
+    payload.hasMore = true
+    payload.zukan = data.slice(0, INCREASE)
+  }
+
+  return payload
 }
 
 export default filteringReducer

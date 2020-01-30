@@ -8,7 +8,6 @@ export const FILTERING_SERIES = 'FILTERING_SERIES'
 export const FILTERING_FAVORITES = 'FILTERING_FAVORITES'
 export const FILTERING_CLEAR = 'FILTERING_CLEAR'
 export const UPDATE_PAGE = 'UPDATE_PAGE'
-export const RESET_PAGE = 'RESET_PAGE'
 
 export const showFeatureModal = () => ({
   type: SHOW_FEATURE_MODAL,
@@ -57,8 +56,4 @@ export const filteringClear = () => ({
 
 export const updatePage = () => ({
   type: UPDATE_PAGE
-})
-
-export const resetPage = () => ({
-  type: RESET_PAGE
 })
