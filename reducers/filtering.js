@@ -5,6 +5,7 @@ import {
 } from '../actions'
 import pokedex from '../assets/pokedex.json'
 
+// 増加量
 const INCREASE = 35
 
 export const filteringState = {
@@ -28,8 +29,7 @@ const filteringReducer = (state = filteringState, action) => {
     case FILTERING_TYPES:
       let types = state.selectedTypes.slice()
 
-      // selectedTypesにすでに同一のtypeが含まれているなら、そのtypeを除外
-      // そうでなければtypeを追加
+      // selectedTypesにすでに同一のtypeが含まれているなら、そのtypeを除外。そうでなければtypeを追加。
       if (types.includes(action.pokeType)) {
         types = state.selectedTypes.filter((type) => {
           return type !== action.pokeType
@@ -38,8 +38,7 @@ const filteringReducer = (state = filteringState, action) => {
         types.push(action.pokeType)
       }
 
-      // typesが空でなければtypesから一致するポケモンデータを返してもらう
-      // 空ならpokedexの全データを使用する
+      // typesが空でなければtypesから一致するポケモンデータを返してもらう。空ならpokedexの全データを使用する。
       rowZukan = types.length > 0 ? filteringTypes(types) : pokedex
 
       // inifite scroll対応
@@ -109,7 +108,7 @@ const filteringReducer = (state = filteringState, action) => {
       end = page * INCREASE
       hasMore = true
 
-      // rowZukanの件数を超えたら
+      // rowZukanの件数を超えたら、infinite scrollを停止させる
       if (end > state.rowZukan.length) {
         end = state.rowZukan.length
         hasMore = false
@@ -173,7 +172,7 @@ const filteringSeries = (data) => {
   return pokedex.slice(start, end)
 }
 
-// お気に入りに入ってるidに一致するポケモンを抽出する
+// お気に入りidに一致するポケモンを抽出する
 const filteringFavorites = (data) => {
   const payload = []
 

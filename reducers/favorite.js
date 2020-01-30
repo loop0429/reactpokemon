@@ -10,8 +10,7 @@ const favoriteReducer = (state = favoriteState, action) => {
     case TOGGLE_FAVORITE:
       let favorites = state.favoritesPokemon.slice()
 
-      // favoritesPokemonにすでに同一のidが含まれているなら、そのidを除外
-      // そうでなければidを追加
+      // favoritesPokemonにすでに同一のidが含まれているなら、そのidを除外。そうでなければidを追加。
       if (favorites.includes(action.id)) {
         favorites = state.favoritesPokemon.filter((pokemon) => {
           return pokemon !== action.id

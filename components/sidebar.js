@@ -58,6 +58,11 @@ const useCollapse = () => {
     series: false
   }
 
+  const initialStyle = {
+    height: '0px',
+    overflow: 'hidden'
+  }
+
   // stateの設定
   // cf., https://ja.reactjs.org/docs/hooks-state.html
   const [isOpened, setCollapseOpened] = useState(isCollapseOpened)
@@ -66,15 +71,14 @@ const useCollapse = () => {
   const toggleCollapse = (e) => {
     const payload = {}
     Object.keys(isOpened).forEach((key) => {
-      // 選択したものなら、Booleanをtoggle
-      // 選択したものでなければ閉じる（閉じてても閉じる）
+      // 選択したものなら、Booleanをtoggle。選択したものでなければ閉じる（閉じてても閉じる）
       payload[key] = e === key ? !isOpened[e] : false
     })
 
     setCollapseOpened(payload)
   }
 
-  return { isOpened, toggleCollapse }
+  return { initialStyle, isOpened, toggleCollapse }
 }
 
 const Sidebar = () => {
@@ -85,7 +89,7 @@ const Sidebar = () => {
     handleFilterSeriesClick, handleFilterClearClick
   } = useSidebar()
 
-  const { isOpened, toggleCollapse } = useCollapse()
+  const { initialStyle, isOpened, toggleCollapse } = useCollapse()
 
   // isOpenSidebar: trueならサイドバーを表示させる
   let sidebarClass = 'sidebar'
@@ -95,10 +99,7 @@ const Sidebar = () => {
 
   return (
     <div className={sidebarClass}>
-      <div
-        className="sidebar__overlay"
-        onClick={() => {handleOverlayClick()}}
-      />
+      <div className="sidebar__overlay" onClick={() => {handleOverlayClick()}} />
       <div className="sidebar__wrapper">
         <dl className="m-0">
           <dt className="p-2 bg-gray-200">絞り込み検索</dt>
@@ -119,18 +120,12 @@ const Sidebar = () => {
             >
               タイプで絞り込み
             </button>
-            <Collapse
-              isOpened={isOpened.types}
-              initialStyle={{height: '0px', overflow: 'hidden'}}
-            >
+            <Collapse isOpened={isOpened.types} initialStyle={initialStyle}>
               <ul className="filter-child__list">
                 {TYPES.map((item) => {
                   // タイプ一覧の表示
                   return (
-                    <li
-                      key={item.en}
-                      className="filter-child__item"
-                    >
+                    <li key={item.en} className="filter-child__item">
                       <button
                         className={selectedTypes.includes(item.en) ?
                           "relative w-full bg-gray-200 filter-child__btn" :
@@ -171,18 +166,12 @@ const Sidebar = () => {
             >
               シリーズで絞り込み
             </button>
-            <Collapse
-              isOpened={isOpened.series}
-              initialStyle={{height: '0px', overflow: 'hidden'}}
-            >
+            <Collapse isOpened={isOpened.series} initialStyle={initialStyle}>
               <ul className="filter-child__list">
                 {SERIES.map((item) => {
                   // シリーズ一覧の表示
                   return (
-                    <li
-                      key={item.numbers}
-                      className="filter-child__item"
-                    >
+                    <li key={item.numbers} className="filter-child__item">
                       <button
                         className={selectedSeries === item.numbers ?
                           "relative w-full bg-gray-200 filter-child__btn" :

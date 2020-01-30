@@ -31,10 +31,7 @@ const Header = () => {
           type="button"
           onClick={() => {handleMenuClick()}}
         >
-          <FontAwesomeIcon
-            icon={faBars}
-            size="2x"
-          />
+          <FontAwesomeIcon icon={faBars} size="2x" />
         </button>
         <h1 className="text-2xl lg:text-4xl font-semibold text-center">ポケモンGO図鑑</h1>
         <button
@@ -42,10 +39,7 @@ const Header = () => {
           type="button"
           onClick={() => {handleFeatureClick()}}
         >
-          <FontAwesomeIcon
-            icon={faQuestionCircle}
-            size="2x"
-          />
+          <FontAwesomeIcon icon={faQuestionCircle} size="2x" />
         </button>
       </div>
       <style jsx>{`

@@ -22,6 +22,7 @@ const modalReducer = (state = modalState, action) => {
     case SHOW_WEAKREGIST_MODAL:
       // 弱点耐性のオブジェクトを作ってもらう
       const weakResist = calcWeakRegist(action.payload.id)
+
       return {
         ...state,
         isOpenModal: true,
@@ -96,9 +97,9 @@ const calcWeakRegist = (id) => {
     }
   }
 
-  // wsDataに登録されてる内容から、弱点耐性の振り分け
+  // wsDataに登録されてる内容から弱点耐性の振り分け
   Object.keys(wsData).forEach((type) => {
-    // 画像ファイルと日本語名
+    // タイプの画像ファイルと日本語名
     const data = {
       type: weakResistDex[type].ja,
       img: `/static/img/icon/type-${type}.png`
