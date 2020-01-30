@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { showWeakResistModal, toggleFavorite } from '../actions'
+import InfiniteScroll from 'react-infinite-scroller'
+import { showWeakResistModal, toggleFavorite, updatePage } from '../actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
@@ -9,6 +10,7 @@ const useZukan = () => {
   // state
   const filteredZukan = useSelector((state) => state.filteringReducer.filteredZukan)
   const favoritesPokemon  = useSelector((state) => state.favoriteReducer.favoritesPokemon)
+  const hasMore = useSelector((state) => state.filteringReducer.hasMore)
 
   const dispatch = useDispatch()
 
@@ -22,69 +24,85 @@ const useZukan = () => {
     dispatch(toggleFavorite(id))
   }
 
+  // スクロール位置がページ最下部付近に到達した時
+  const handleLoadMore = () => {
+    dispatch(updatePage())
+  }
+
   return {
     filteredZukan, favoritesPokemon,
-    handlePokemonClick, handleFavoriteClick
+    handlePokemonClick, handleFavoriteClick,
+    hasMore, handleLoadMore
   }
 }
 
 const Zukan = () => {
   const {
     filteredZukan, favoritesPokemon,
-    handlePokemonClick, handleFavoriteClick
+    handlePokemonClick, handleFavoriteClick,
+    hasMore, handleLoadMore
   } = useZukan()
+
   return (
     <div className="max-w-5xl mx-auto px-3 sm:px-0">
-      <ul className="flex flex-wrap justify-between sm:justify-start pt-20 sm:pt-24 zukan__list">
-        {filteredZukan.map((item) => {
-          return (
-            <li
-              key={item.id}
-              className="mb-3 zukan__item"
-            >
-              <div className="sm:mx-2 shadow-md">
-                <div className="flex justify-end pt-2 pr-2">
-                  <button
-                    className="leading-none btn-favorite"
-                    type="button"
-                    onClick={() => {handleFavoriteClick(item.id)}}
+      <InfiniteScroll
+        page={0}
+        loadMore={() => {handleLoadMore()}}
+        hasMore={hasMore}
+        initialLoad={false}
+        loader={<div className="text-center" key={0}>Loading ...</div>}
+      >
+        <ul className="flex flex-wrap justify-between sm:justify-start pt-20 sm:pt-24 zukan__list">
+          {filteredZukan.map((item) => {
+            return (
+              <li
+                key={item.id}
+                className="mb-3 zukan__item"
+              >
+                <div className="sm:mx-2 shadow-md">
+                  <div className="flex justify-end pt-2 pr-2">
+                    <button
+                      className="leading-none btn-favorite"
+                      type="button"
+                      onClick={() => {handleFavoriteClick(item.id)}}
+                    >
+                      {/* お気に入りにidが含まれていたらfontAwesome変更 */}
+                      <FontAwesomeIcon
+                        className="text-pink-400"
+                        icon={favoritesPokemon.includes(item.id) ? faHeart : farHeart}
+                      />
+                    </button>
+                  </div>
+                  <div
+                    className="pb-1 sm:pb-2 cursor-pointer text-center zukan__btn"
+                    onClick={() => {handlePokemonClick(item.id)}}
                   >
-                    {/* お気に入りにidが含まれていたらfontAwesome変更 */}
-                    <FontAwesomeIcon
-                      className="text-pink-400"
-                      icon={favoritesPokemon.includes(item.id) ? faHeart : farHeart}
-                    />
-                  </button>
+                    <div className={`mx-auto icon-${item.id}MS`} />
+                    <span className="inline-block text-xs">{`No.${item.id}`}</span>
+                    <ul className="inline-block">
+                      {item.type.map((types) => {
+                        return (
+                          <li
+                            key={types}
+                            className="inline-block ml-1"
+                          >
+                            <img
+                              src={`/static/img/icon/type-${types}.png`}
+                              width="15"
+                            />
+                          </li>
+                        )
+                      })}
+                    </ul>
+                    <span className="block text-sm">{item.name.japanese}</span>
+                    <span className="block text-gray-400 text-xs">{item.name.english}</span>
+                  </div>
                 </div>
-                <div
-                  className="pb-1 sm:pb-2 cursor-pointer text-center zukan__btn"
-                  onClick={() => {handlePokemonClick(item.id)}}
-                >
-                  <div className={`mx-auto icon-${item.id}MS`} />
-                  <span className="inline-block text-xs">{`No.${item.id}`}</span>
-                  <ul className="inline-block">
-                    {item.type.map((types) => {
-                      return (
-                        <li
-                          key={types}
-                          className="inline-block ml-1"
-                        >
-                          <img
-                            src={`/static/img/icon/type-${types}.png`}
-                            width="15"
-                          />
-                        </li>
-                      )
-                    })}
-                  </ul>
-                  <span className="block text-sm">{item.name.japanese}</span>
-                  <span className="block text-gray-400 text-xs">{item.name.english}</span>
-                </div>
-              </div>
-            </li>
-          )
-        })}
-      </ul>
+              </li>
+            )
+          })}
+        </ul>
+      </InfiniteScroll>
       <style jsx>{`
         .zukan__item {
           width: 31%;

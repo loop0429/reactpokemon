@@ -77,18 +77,27 @@ const filteringReducer = (state = filteringState, action) => {
     // pageのカウントアップ
     case UPDATE_PAGE:
       const page = state.page + 1
-      const end = page * 35
+      let end = page * 35
+      let hasMore = true
+
+      // 図鑑番号を超えたら
+      if (end > pokedex.length) {
+        end = pokedex.length
+        hasMore = false
+      }
 
       return {
         ...state,
         page,
-        filteredZukan: pokedex.slice(0, end)
+        filteredZukan: pokedex.slice(0, end),
+        hasMore
       }
     // pageのリセット
     case RESET_PAGE:
       return {
         ...state,
-        page: 0
+        page: 0,
+        hasMore: true
       }
     default:
       return state
