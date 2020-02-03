@@ -1,3 +1,5 @@
+/* purgecss start ignore */
 .ReactCollapse--collapse {
   transition: height 0.3s ease-in-out;
 }
+/* purgecss end ignore */

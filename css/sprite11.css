@@ -5,6 +5,7 @@ Icon classes can be used entirely standalone. They are named after their origina
 <i class="icon-home"></i>
 ```
 */
+/* purgecss start ignore */
 .icon-501MS {
   background-image: url(/static/img/sprite11.png);
   background-position: -40px 0px;
@@ -305,3 +306,4 @@ Icon classes can be used entirely standalone. They are named after their origina
   width: 40px;
   height: 40px;
 }
+/* purgecss end ignore */
