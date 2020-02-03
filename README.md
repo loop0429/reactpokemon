@@ -15,3 +15,6 @@ yarn spritesmith // .spritesmith.jsを元にスプライト画像を生成
 - 図鑑データ https://github.com/fanzeyi/pokemon.json
 - tailwindcss https://tailwindcss.com/
 - fontAwesome https://fontawesome.com/
+
+## nowについて
+- 勝手にデプロイされるよ
